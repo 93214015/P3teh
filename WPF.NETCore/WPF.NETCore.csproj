@@ -7,25 +7,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Icons\CCTV Icon.png" />
+    <None Remove="Images\Icons\Demo Icon.png" />
+    <None Remove="Images\Icons\Power Icon.png" />
+    <None Remove="Images\Icons\Setting Icon.png" />
+    <None Remove="Images\MainImage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="telerik.ui.for.wpf.netcore.xaml" Version="2021.1.119" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Images\Icons\CCTV Icon.png">
+    <Resource Include="Images\Icons\CCTV Icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Icons\Demo Icon.png">
+    </Resource>
+    <Resource Include="Images\Icons\Demo Icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Icons\Power Icon.png">
+    </Resource>
+    <Resource Include="Images\Icons\Power Icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Icons\Setting Icon.png">
+    </Resource>
+    <Resource Include="Images\Icons\Setting Icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\MainImage.png">
+    </Resource>
+    <Resource Include="Images\MainImage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Resource>
   </ItemGroup>
 
 </Project>

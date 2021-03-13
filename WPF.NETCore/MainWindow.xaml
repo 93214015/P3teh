@@ -6,22 +6,160 @@
         xmlns:local="clr-namespace:WPF.NETCore"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="WPF.NETCore.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="804" ResizeMode="NoResize" Icon="/Images/MainImage.png" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow">
+        Title="MainWindow" Height="450" Width="804" ResizeMode="NoResize" Icon="/Images/MainImage.png" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Storyboard x:Key="STBStartApp">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnSetting" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-22">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnSetting" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnDemo" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="22">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnDemo" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnCCTV" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnCCTV" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-20">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TxtBlock_Time" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="STBLeftMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnMenuLeft" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="STBLeftMenuReverse">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-100">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnMenuLeft" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BtnLeftMenuClose" Storyboard.TargetProperty="(FrameworkElement.Cursor)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:01">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Cursor>Hand</Cursor>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BtnMenuLeft" Storyboard.TargetProperty="(FrameworkElement.Cursor)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <x:Null/>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:01">
+                    <DiscreteObjectKeyFrame.Value>
+                        <Cursor>Hand</Cursor>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
     <DockPanel x:Name="MainDock" LastChildFill="True">
         <Border BorderThickness="0,0,0,1" BorderBrush="Black" DockPanel.Dock="Top">
             <DockPanel LastChildFill="False" DockPanel.Dock="Top" Height="50">
                 <StackPanel DockPanel.Dock="Top" Height="50" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Canvas.Left="-4" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0" >
+                    <Button x:Name="BtnSetting" Canvas.Left="421" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" >
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                        <StackPanel>
+                            <Image x:Name="image" Source="/Images/Icons/Setting Icon.png" RenderTransformOrigin="0.5,0.5" >
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="BtnCCTV" Canvas.Left="-4" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0" >
                         <StackPanel>
                             <Image Source="Images/Icons/CCTV Icon.png" />
                         </StackPanel>
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
                     </Button>
-                    <Button Canvas.Left="421" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,10,0" >
-                        <StackPanel>
-                            <Image Source="/Images/Icons/Setting Icon.png" />
-                        </StackPanel>
-                    </Button>
-                    <Button Canvas.Left="245.5" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,10,0" >
+                    <Button x:Name="BtnDemo" Canvas.Left="245.5" Width="50" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" >
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
                         <StackPanel>
                             <Image Source="/Images/Icons/Demo Icon.png" />
                         </StackPanel>
@@ -31,14 +169,61 @@
         </Border>
         <Border BorderThickness="1,0,0,0" BorderBrush="Black" DockPanel.Dock="Right">
             <StackPanel DockPanel.Dock="Right" Width="101">
-                <Button Height="50" Width="50" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Button x:Name="button" Height="50" Width="50" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
                     <Image Source="/Images/Icons/Power Icon.png" />
                 </Button>
-                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Stretch" FontFamily="Arabic Typesetting" TextAlignment="Center" FontSize="30" Height="30"><Run Text="10:30"/><LineBreak/><Run/></TextBlock>
+                <TextBlock x:Name="TxtBlock_Time" TextWrapping="Wrap" HorizontalAlignment="Stretch" FontFamily="Arabic Typesetting" TextAlignment="Center" FontSize="30" Height="30"><Run Text="10:30"/><LineBreak/><Run/></TextBlock>
             </StackPanel>
         </Border>
+        <Grid x:Name="grid" Width="100" RenderTransformOrigin="0.5,0.5">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-100"/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Rectangle Stroke="Black" Margin="0,0,-0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="#FFDADADA" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+            <Viewbox x:Name="BtnLeftMenuClose" Width="35" Height="35" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" MouseDown="BtnLeftMenuClose_MouseDown" Cursor="Hand">
+                <Canvas Width="24" Height="24">
+                    <Path Fill="Black" Data="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+                </Canvas>
+            </Viewbox>
+        </Grid>
         <Canvas x:Name="CenterArea" DockPanel.Dock="Right" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Image Source="Images/MainImage.png" Width="200" Canvas.Left="251" Canvas.Top="126.425"/>
+            <Viewbox x:Name="BtnMenuLeft" Width="48" Height="48" VerticalAlignment="Center" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" MouseDown="BtnMenuLeft_MouseDown" Cursor="Hand">
+                <Viewbox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="90"/>
+                        <TranslateTransform X="-100" Y="150"/>
+                    </TransformGroup>
+                </Viewbox.RenderTransform>
+                <Canvas Width="24" Height="24" Cursor="Hand">
+                    <Path Fill="Black" Data="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+                </Canvas>
+            </Viewbox>
+            <Image Source="Images/MainImage.png" Width="200" Canvas.Left="201" Canvas.Top="126.425"/>
         </Canvas>
     </DockPanel>
 </Window>
