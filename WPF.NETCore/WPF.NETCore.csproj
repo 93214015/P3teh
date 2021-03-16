@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\DemoImage.png" />
     <None Remove="Images\Icons\CCTV Icon.png" />
     <None Remove="Images\Icons\Demo Icon.png" />
     <None Remove="Images\Icons\Power Icon.png" />
@@ -15,10 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="telerik.ui.for.wpf.netcore.xaml" Version="2021.1.119" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Resource Include="Images\DemoImage.png" />
     <Resource Include="Images\Icons\CCTV Icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
