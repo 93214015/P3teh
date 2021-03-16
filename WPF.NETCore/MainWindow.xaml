@@ -321,7 +321,7 @@
                     </Button.RenderTransform>
                     <Image Source="/Images/Icons/Power Icon.png" />
                 </Button>-->
-                <Button x:Name="BtnPower" Style="{StaticResource StyleRoundButton}" Canvas.Left="245.5" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" >
+                <Button x:Name="BtnPower" Style="{StaticResource StyleRoundButton}" Canvas.Left="245.5" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" Click="BtnPower_Click" >
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>

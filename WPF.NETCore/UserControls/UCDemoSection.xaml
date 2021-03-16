@@ -28,7 +28,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border Margin="30,30,0,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5,5,5,5" BorderBrush="#FF838383" BorderThickness="1,1,1,1">
-            <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Image x:Name="CameraPicture" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill"/>
         </Border>
         <Grid Grid.Column="1" Margin="30,30,30,30">
             <Grid.RowDefinitions>

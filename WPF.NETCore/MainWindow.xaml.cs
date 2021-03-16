@@ -91,6 +91,11 @@ namespace WPF.NETCore
             if (mCurrentPanels == EPanels.CCTV)
                 return;
 
+            if (mCurrentPanels == EPanels.Demo)
+            {
+                DemoPanel.StopCamera();
+            }
+
             mCurrentPanels = EPanels.CCTV;
 
             Storyboard STBImagePopIn = (Storyboard)this.FindResource("STBImagePopIn");
@@ -102,5 +107,11 @@ namespace WPF.NETCore
         }
 
         private EPanels mCurrentPanels = EPanels.CCTV;
+
+        private void BtnPower_Click(object sender, RoutedEventArgs e)
+        {
+            if (mCurrentPanels == EPanels.Demo)
+                DemoPanel.PowerCamera();
+        }
     }
 }
