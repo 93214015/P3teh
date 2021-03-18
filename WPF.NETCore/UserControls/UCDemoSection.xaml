@@ -21,13 +21,48 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Foreground" Value="#333" />
         </Style>
+        <Storyboard x:Key="DemoAnimation" RepeatBehavior="Forever">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="50"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="50"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo2" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="50"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="50"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border Margin="30,30,0,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5,5,5,5" BorderBrush="#FF838383" BorderThickness="1,1,1,1">
+        <Border Margin="30,30,0,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FF838383" BorderThickness="1,1,1,1">
             <Image x:Name="CameraPicture" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill"/>
         </Border>
         <Grid Grid.Column="1" Margin="30,30,30,30">
@@ -39,8 +74,29 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Border  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5,5,5,5" BorderBrush="#FF838383" BorderThickness="1,1,1,1">
-                <Image Name="ImgDemo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Image>
+            <Border  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FF838383" BorderThickness="0,0,1,1">
+                <Grid>
+                    <Image Name="ImgDemo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="/Images/DemoImage.png" RenderTransformOrigin="0.5,0.5" >
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image Name="ImgDemo2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="/Images/DemoImage2.png" Opacity="0" RenderTransformOrigin="0.5,0.5" >
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
             </Border>
             <Grid Grid.Column="1" FlowDirection="RightToLeft">
                 <Grid.RowDefinitions>
@@ -59,7 +115,7 @@
                 <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource StyleTextInfo}" Text="..." HorizontalAlignment="Center" />
                 <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource StyleTextInfo}" Text="..." HorizontalAlignment="Center" />
             </Grid>
-            <Border Grid.Column="1" Grid.Row="1" BorderBrush="#FFA2A2A2" BorderThickness="1,1,1,1" CornerRadius="5,5,5,5">
+            <Border Grid.Column="1" Grid.Row="1" BorderBrush="#FFA2A2A2" BorderThickness="1,1,0,0">
                 <Grid FlowDirection="RightToLeft">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -77,6 +133,27 @@
                     <TextBlock Grid.Row="3" Style="{StaticResource StyleTextInfo}" Text="میانگین زمان :" HorizontalAlignment="Right"/>
                 </Grid>
             </Border>
+            <Grid Grid.Row="1" Grid.Column="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="MinThreshold :" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="1" Text="MaxThreshold :" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="2" Text="MinFil :" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="3" Text="MinMorph :" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0" FontFamily="Segoe UI" TextAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0" FontFamily="Segoe UI" TextAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0" FontFamily="Segoe UI" TextAlignment="Center"/>
+                <TextBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0" FontFamily="Segoe UI" TextAlignment="Center"/>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
+using System.Windows.Media.Animation;
 
 namespace WPF.NETCore.UserControls
 {
@@ -96,6 +97,8 @@ namespace WPF.NETCore.UserControls
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             ImgDemo.Source = ImageSourceDemo;
+            var DemoAnimation = (Storyboard)this.FindResource("DemoAnimation");
+            DemoAnimation.Begin();
         }
     }
 }
