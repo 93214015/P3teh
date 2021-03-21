@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:WPF.NETCore"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Color x:Key="ColorMainBackground">#FFF</Color>
+        <Color x:Key="ColorMainTopBar">#304C89</Color>
+        <Color x:Key="ColorMainBtnLight">#648DE5</Color>
+        <Color x:Key="ColorMainBtnDark">#000D30</Color>
+        <Color x:Key="ColorMainRightBar">#000D30</Color>
+
+
+        <SolidColorBrush x:Key="SolidBrushColorMainBackground" Color="{StaticResource ColorMainBackground}" />
+        <SolidColorBrush x:Key="SolidBrushColorMainTopBar" Color="{StaticResource ColorMainTopBar}"/>
+        <SolidColorBrush x:Key="SolidBrushColorMainRightBar" Color="{StaticResource ColorMainRightBar}"/>
+        <SolidColorBrush x:Key="SolidBrushColorMainBtnLight" Color="{StaticResource ColorMainBtnLight}"/>
+        <SolidColorBrush x:Key="SolidBrushColorMainBtnDark" Color="{StaticResource ColorMainBtnDark}"/>
     </Application.Resources>
 </Application>

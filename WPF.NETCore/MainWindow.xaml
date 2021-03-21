@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF.NETCore"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:UserControls="clr-namespace:WPF.NETCore.UserControls" x:Class="WPF.NETCore.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="804" ResizeMode="NoResize" Icon="/Images/MainImage.png" WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded">
+        Title="MainWindow" Height="450" Width="804" ResizeMode="NoResize" Icon="/Images/MainImage.png" WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded" Background="{x:Null}" AllowsTransparency="True">
     <Window.Resources>
         <Storyboard x:Key="STBStartApp">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnSetting" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
@@ -133,7 +133,8 @@
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
 
 
-        <ControlTemplate x:Key="CTRoundButton" TargetType="{x:Type Button}">
+        
+        <ControlTemplate x:Key="CTRoundButtonDark" TargetType="{x:Type Button}">
             <Grid Background="Transparent">
                 <Ellipse x:Name="backgroundElement" Stroke="{TemplateBinding Foreground}"/>
                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -144,7 +145,7 @@
                         <Storyboard>
                             <ColorAnimation
                              Storyboard.TargetProperty="Foreground.Color"
-                             From="{StaticResource BtnForegroundNormal}" To="{StaticResource BtnForegroundMouseEnter}"
+                             To="{StaticResource BtnForegroundMouseEnter}"
                              Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -154,7 +155,54 @@
                         <Storyboard>
                             <ColorAnimation
                              Storyboard.TargetProperty="Foreground.Color"
-                             To="{StaticResource BtnForegroundNormal}"
+                             To="{StaticResource ColorMainBtnDark}"
+                             Duration="0:0:1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="ButtonBase.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                             To="1.15"
+                             Duration="0:0:.1" AutoReverse="true" />
+                            <DoubleAnimation
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                             To="1.15"
+                             Duration="0:0:.1" AutoReverse="true" />
+                            <ColorAnimation
+                             Storyboard.TargetProperty="(UIElement.OpacityMask).(SolidColorBrush.Color)"
+                             To="Transparent"
+                             Duration="0:0:.1" AutoReverse="true" />
+                        </Storyboard>
+
+                    </BeginStoryboard>
+                </EventTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="CTRoundButtonLight" TargetType="{x:Type Button}">
+            <Grid Background="Transparent">
+                <Ellipse x:Name="backgroundElement" Stroke="{TemplateBinding Foreground}"/>
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+            <ControlTemplate.Triggers>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                             Storyboard.TargetProperty="Foreground.Color"
+                             To="{StaticResource BtnForegroundMouseEnter}"
+                             Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                             Storyboard.TargetProperty="Foreground.Color"
+                             To="{StaticResource ColorMainBtnLight}"
                              Duration="0:0:1" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -181,8 +229,9 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
+
         <Style x:Key="StyleRoundButton" TargetType="{x:Type Button}" >
-            <Setter Property="Template" Value="{StaticResource CTRoundButton}"/>
+            
             <Setter Property="Foreground">
                 <Setter.Value>
                     <SolidColorBrush Color="{StaticResource BtnForegroundNormal}" />
@@ -190,6 +239,23 @@
             </Setter>
             <Setter Property="OpacityMask" Value="Black" />
         </Style>
+        <Style x:Key="StyleRoundBtnTopBar" BasedOn="{StaticResource StyleRoundButton}" TargetType="Button">
+            <Setter Property="Template" Value="{StaticResource CTRoundButtonDark}"/>
+            <Setter Property="Foreground" Value="{StaticResource SolidBrushColorMainBtnDark}" />
+        </Style>
+        <Style x:Key="StyleRoundBtnRightBar" BasedOn="{StaticResource StyleRoundButton}" TargetType="Button">
+            <Setter Property="Template" Value="{StaticResource CTRoundButtonLight}"/>
+            <Setter Property="Foreground" Value="{StaticResource SolidBrushColorMainBtnLight}" />
+        </Style>
+        <Style x:Key="StyleRoundBtnWindows" BasedOn="{StaticResource StyleRoundButton}" TargetType="Button">
+            <Setter Property="Template" Value="{StaticResource CTRoundButtonLight}"/>
+            <Setter Property="Foreground" Value="{StaticResource SolidBrushColorMainBtnLight}" />
+            <Setter Property="Width" Value="15" />
+            <Setter Property="Height" Value="15" />
+        </Style>
+
+
+
         <Storyboard x:Key="STBFlashyFadeOut">
             <ColorAnimationUsingKeyFrames Storyboard.TargetName="_PathSettingIcon2" Storyboard.TargetProperty="(UIElement.OpacityMask).(SolidColorBrush.Color)">
                 <EasingColorKeyFrame KeyTime="00:00:00" Value="Black"/>
@@ -256,11 +322,46 @@
 
     </Window.Resources>
     <DockPanel x:Name="MainDock" LastChildFill="True">
-
-        <Border BorderThickness="0,0,0,1" BorderBrush="Black" DockPanel.Dock="Top">
-            <DockPanel LastChildFill="False" DockPanel.Dock="Top" Height="50">
-                <StackPanel DockPanel.Dock="Top" Height="50" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button x:Name="BtnSetting" Style="{StaticResource StyleRoundButton}" Canvas.Left="421" Width="45" Height="45" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" OpacityMask="Black" >
+        <Border x:Name="WindowButtons" DockPanel.Dock="Top" Height="30" HorizontalAlignment="Stretch">
+            <Border BorderThickness="1,1,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <StackPanel Background="{StaticResource SolidBrushColorMainRightBar}" HorizontalAlignment="Stretch" Orientation="Horizontal" VerticalAlignment="Center" FlowDirection="RightToLeft" Height="50">
+                <Button x:Name="BtnCloseWindow" Style="{DynamicResource StyleRoundBtnWindows}" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" OpacityMask="Black" Click="BtnCloseWindow_Click" >
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Viewbox Height="40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Canvas Width="24" Height="24">
+                            <Path Fill="{Binding Foreground, ElementName=BtnCloseWindow}" Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                        </Canvas>
+                    </Viewbox>
+                </Button>
+                <Button x:Name="BtnMinimizeWindow" Style="{DynamicResource StyleRoundBtnWindows}" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" OpacityMask="Black" Click="BtnMinimizeWindow_Click" >
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Viewbox Height="40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Canvas Width="24" Height="24">
+                            <Path Fill="{Binding Foreground, ElementName=BtnMinimizeWindow}"  Data="M20,14H4V10H20"  />
+                        </Canvas>
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+            </Border>
+        </Border>
+        <Border x:Name="TopBar" Background="{StaticResource SolidBrushColorMainTopBar}" BorderThickness="0,0,0,1" BorderBrush="Black" DockPanel.Dock="Top">
+            <Grid DockPanel.Dock="Top">                
+                <StackPanel Height="50" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button x:Name="BtnSetting" Style="{DynamicResource StyleRoundBtnTopBar}" Foreground="{StaticResource SolidBrushColorMainBtnDark}" Canvas.Left="421" Width="45" Height="45" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" OpacityMask="Black" >
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -275,7 +376,22 @@
                             </Canvas>
                         </Viewbox>
                     </Button>
-                    <Button x:Name="BtnCCTV" Style="{StaticResource StyleRoundButton}" Canvas.Left="245.5" Width="45" Height="45" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" Click="BtnCCTV_Click" >
+                    <Button x:Name="BtnHome" Style="{DynamicResource StyleRoundBtnTopBar}" Foreground="{StaticResource SolidBrushColorMainBtnDark}" Canvas.Left="421" Width="45" Height="45" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" OpacityMask="Black" Click="BtnHome_Click" >
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                        <Viewbox Height="40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Canvas Width="24" Height="24">
+                                <Path Data="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{Binding Foreground, ElementName=BtnHome}" OpacityMask="Black" />
+                            </Canvas>
+                        </Viewbox>
+                    </Button>
+                    <Button x:Name="BtnCCTV" Style="{DynamicResource StyleRoundBtnTopBar}" Canvas.Left="245.5" Width="45" Height="45" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" Click="BtnCCTV_Click" >
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -290,7 +406,7 @@
                             </Canvas>
                         </Viewbox>
                     </Button>
-                    <Button x:Name="BtnDemo" Style="{StaticResource StyleRoundButton}" Canvas.Left="245.5" Width="45" Height="45" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" Click="BtnDemo_Click" >
+                    <Button x:Name="BtnDemo" Style="{DynamicResource StyleRoundBtnTopBar}" Canvas.Left="245.5" Width="45" Height="45" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" Click="BtnDemo_Click" >
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -306,9 +422,9 @@
                         </Viewbox>
                     </Button>
                 </StackPanel>
-            </DockPanel>
+            </Grid>
         </Border>
-        <Border BorderThickness="1,0,0,0" BorderBrush="Black" DockPanel.Dock="Right">
+        <Border x:Name="RightBar" Background="{StaticResource SolidBrushColorMainRightBar}" BorderThickness="1,0,0,0" BorderBrush="Black" DockPanel.Dock="Right">
             <Grid DockPanel.Dock="Right" Width="101">
                 <!--<Button x:Name="button" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center">
                     <Button.RenderTransform>
@@ -321,7 +437,7 @@
                     </Button.RenderTransform>
                     <Image Source="/Images/Icons/Power Icon.png" />
                 </Button>-->
-                <Button x:Name="BtnPower" Style="{StaticResource StyleRoundButton}" Canvas.Left="245.5" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" Click="BtnPower_Click" >
+                <Button x:Name="BtnPower" Style="{DynamicResource StyleRoundBtnRightBar}" Canvas.Left="245.5" Width="60" Height="60" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" Click="BtnPower_Click" >
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -332,14 +448,14 @@
                     </Button.RenderTransform>
                     <Viewbox Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Canvas Width="24" Height="24">
-                            <Path Fill="Black" Data="M16.56,5.44L15.11,6.89C16.84,7.94 18,9.83 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12C6,9.83 7.16,7.94 8.88,6.88L7.44,5.44C5.36,6.88 4,9.28 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12C20,9.28 18.64,6.88 16.56,5.44M13,3H11V13H13" />
+                            <Path Fill="{Binding Foreground, ElementName=BtnPower}" Data="M16.56,5.44L15.11,6.89C16.84,7.94 18,9.83 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12C6,9.83 7.16,7.94 8.88,6.88L7.44,5.44C5.36,6.88 4,9.28 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12C20,9.28 18.64,6.88 16.56,5.44M13,3H11V13H13" />
                         </Canvas>
                     </Viewbox>
                 </Button>
-                <TextBlock x:Name="TxtBlock_Time" TextWrapping="Wrap" FontFamily="Arabic Typesetting" TextAlignment="Center" FontSize="30" VerticalAlignment="Bottom"><Run Text="10:30"/><LineBreak/><Run/></TextBlock>
+                <TextBlock x:Name="TxtBlock_Time" TextWrapping="Wrap" FontFamily="Arabic Typesetting" TextAlignment="Center" FontSize="30" VerticalAlignment="Bottom" Foreground="{StaticResource SolidBrushColorMainBtnLight}"><Run Text="10:30"/><LineBreak/><Run/></TextBlock>
             </Grid>
         </Border>
-        <Grid>
+        <Grid x:Name="MainPanel" Background="{StaticResource SolidBrushColorMainBackground}">
             <!--<Image Source="Images/MainImage.png" Width="200" Canvas.Left="201" Canvas.Top="126.425"/>-->
             <Image x:Name="MainImage" Source="Images/MainImage.png" Width="200" Canvas.Left="201" Canvas.Top="126.425" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
@@ -372,7 +488,7 @@
                     </TransformGroup>
                 </Viewbox.RenderTransform>
                 <Canvas Width="24" Height="24" Cursor="Hand" Background="#00000000">
-                    <Path Fill="Black" Data="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+                    <Path Fill="{DynamicResource SolidBrushColorMainBtnDark}" Data="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
                 </Canvas>
             </Viewbox>
             <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5" Width="100" HorizontalAlignment="Left">
@@ -394,10 +510,10 @@
                         <TranslateTransform X="-100"/>
                     </TransformGroup>
                 </Grid.RenderTransform>
-                <Rectangle Stroke="Black" Margin="0,0,-0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="#FFDADADA" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
+                <Rectangle Stroke="Black" Margin="0,0,-0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="#FF000D30" Grid.RowSpan="3" Grid.ColumnSpan="3"/>
                 <Viewbox x:Name="BtnLeftMenuClose" Width="35" Height="35" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" MouseDown="BtnLeftMenuClose_MouseDown" Cursor="Hand">
                     <Canvas Width="24" Height="24" Background="#00000000">
-                        <Path Fill="Black" Data="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+                        <Path Fill="{DynamicResource SolidBrushColorMainBtnLight}" Data="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
                     </Canvas>
                 </Viewbox>
             </Grid>

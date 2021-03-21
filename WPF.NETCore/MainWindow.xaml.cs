@@ -88,6 +88,19 @@ namespace WPF.NETCore
 
         private void BtnCCTV_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        private EPanels mCurrentPanels = EPanels.CCTV;
+
+        private void BtnPower_Click(object sender, RoutedEventArgs e)
+        {
+            if (mCurrentPanels == EPanels.Demo)
+                DemoPanel.PowerCamera();
+        }
+
+        private void BtnHome_Click(object sender, RoutedEventArgs e)
+        {
             if (mCurrentPanels == EPanels.CCTV)
                 return;
 
@@ -106,12 +119,14 @@ namespace WPF.NETCore
             STBPanelsFadeOut.Begin();
         }
 
-        private EPanels mCurrentPanels = EPanels.CCTV;
-
-        private void BtnPower_Click(object sender, RoutedEventArgs e)
+        private void BtnCloseWindow_Click(object sender, RoutedEventArgs e)
         {
-            if (mCurrentPanels == EPanels.Demo)
-                DemoPanel.PowerCamera();
+            this.Close();
+        }
+
+        private void BtnMinimizeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

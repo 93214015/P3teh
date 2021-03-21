@@ -10,50 +10,88 @@
         <Style TargetType="TextBlock" x:Key="StyleTextInfo">
             <Setter Property="TextAlignment" Value="Right" />
             <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontSize" Value="13" />
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Foreground" Value="#333" />
         </Style>
         <Style TargetType="TextBlock" x:Key="StyleTextInfo2">
-            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="TextAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="Arial" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Foreground" Value="#333" />
+            <Setter Property="Foreground" Value="#222" />
         </Style>
         <Storyboard x:Key="DemoAnimation" RepeatBehavior="Forever">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
                 <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:03" Value="50"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="50"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)">
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.6000000" Value="5"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="-50"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo2" Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)">
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="5"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo2" Storyboard.TargetProperty="(UIElement.Opacity)">
                 <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:03" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="50"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-50"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="STBShowResultImage">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-50"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="STBHideResultImage">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="5"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="50"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="50"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImgDemo" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-50"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
@@ -74,9 +112,12 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Border  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FF838383" BorderThickness="0,0,1,1">
+            <Border  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FF838383" BorderThickness="0,0,1,0" Grid.RowSpan="2">
                 <Grid>
-                    <Image Name="ImgDemo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="/Images/DemoImage.png" RenderTransformOrigin="0.5,0.5" >
+                    <Image Name="ImgDemo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="/Images/DemoImage.png" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,0" >
+                        <Image.Effect>
+                            <BlurEffect/>
+                        </Image.Effect>
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -87,6 +128,9 @@
                         </Image.RenderTransform>
                     </Image>
                     <Image Name="ImgDemo2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="/Images/DemoImage2.png" Opacity="0" RenderTransformOrigin="0.5,0.5" >
+                        <Image.Effect>
+                            <BlurEffect/>
+                        </Image.Effect>
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -98,24 +142,7 @@
                     </Image>
                 </Grid>
             </Border>
-            <Grid Grid.Column="1" FlowDirection="RightToLeft">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource StyleTextInfo}" Text="نوع بسته:" />
-                <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource StyleTextInfo}" Text="اندازه : "/>
-                <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource StyleTextInfo}" Text="..." />
-                <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource StyleTextInfo}" Text="..." HorizontalAlignment="Center" />
-                <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource StyleTextInfo}" Text="..." HorizontalAlignment="Center" />
-                <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource StyleTextInfo}" Text="..." HorizontalAlignment="Center" />
-            </Grid>
-            <Border Grid.Column="1" Grid.Row="1" BorderBrush="#FFA2A2A2" BorderThickness="1,1,0,0">
+            <Border BorderBrush="#FFA2A2A2" BorderThickness="0,1,1,1" Grid.Column="1" Grid.RowSpan="2">
                 <Grid FlowDirection="RightToLeft">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -131,29 +158,12 @@
                     <TextBlock Grid.Row="1" Style="{StaticResource StyleTextInfo}" Text="خندان :" HorizontalAlignment="Right"/>
                     <TextBlock Grid.Row="2" Style="{StaticResource StyleTextInfo}" Text="غیر خندان :" HorizontalAlignment="Right"/>
                     <TextBlock Grid.Row="3" Style="{StaticResource StyleTextInfo}" Text="میانگین زمان :" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="TxtTotalCount" Grid.Row="0" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text="15"/>
+                    <TextBlock x:Name="TxtOpenedMouthCount" Grid.Row="1" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text="7"/>
+                    <TextBlock x:Name="TxtClosedMouthCount" Grid.Row="2" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text="8"/>
+                    <TextBlock x:Name="TxtAvgTime" Grid.Row="3" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text= "2ms"/>
                 </Grid>
             </Border>
-            <Grid Grid.Row="1" Grid.Column="0" >
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="MinThreshold :" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Text="MaxThreshold :" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="2" Text="MinFil :" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="3" Text="MinMorph :" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-
-                <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0" FontFamily="Segoe UI" TextAlignment="Center"/>
-                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0" FontFamily="Segoe UI" TextAlignment="Center"/>
-                <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0" FontFamily="Segoe UI" TextAlignment="Center"/>
-                <TextBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,5,0" FontFamily="Segoe UI" TextAlignment="Center"/>
-            </Grid>
         </Grid>
     </Grid>
 </UserControl>
