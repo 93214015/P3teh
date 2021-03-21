@@ -26,21 +26,32 @@ namespace WPF.NETCore.UserControls
 
         VideoCapture mVideoCapture;
 
-        Image _CurrentImage;
-        Image _NextImage;
+        BitmapImage _BitmapOpenedMouth = new BitmapImage();
+        BitmapImage _BitmapClosedMouth = new BitmapImage();
+
+        List<Image> _ListResultImages = new List<Image>();
 
         Storyboard _STBShowResultImage;
         Storyboard _STBHideResultImage;
+        Storyboard _STBShowResultImagePopIn;
 
         public UCDemoSection()
         {
             InitializeComponent();
 
-            _CurrentImage = ImgDemo;
-            _NextImage = ImgDemo2;
+
+            _BitmapOpenedMouth.BeginInit();
+            _BitmapOpenedMouth.UriSource = new Uri("pack://application:,,,/Images/DemoImage.png");
+            _BitmapOpenedMouth.EndInit();
+
+            _BitmapClosedMouth.BeginInit();
+            _BitmapClosedMouth.UriSource = new Uri("pack://application:,,,/Images/DemoImage2.png");
+            _BitmapClosedMouth.EndInit();
+
 
             _STBShowResultImage = (Storyboard)this.FindResource("STBShowResultImage");
             _STBHideResultImage = (Storyboard)this.FindResource("STBHideResultImage");
+            _STBShowResultImagePopIn = (Storyboard)this.FindResource("STBShowResultPopIn");
         }
 
         public async void PowerCamera()
@@ -107,29 +118,50 @@ namespace WPF.NETCore.UserControls
             set { SetValue(ImageSourceDemoProperty, value); }
         }
 
-
-        int openedMouth = 1;
+        int _rand = 0;
         int closedMouth = 0;
+        int openedMouth = 1;
 
         public void ShowResult()
         {
-            
-            foreach (var anim in _STBHideResultImage.Children)
+            var transformGroup = new TransformGroup();
+            transformGroup.Children.Add(new ScaleTransform(0, 0));
+
+            Image _Image = new Image()
             {
-                Storyboard.SetTarget(anim, _CurrentImage);
+                Width = 50,
+                Height = 50,
+                Opacity = 0,
+                RenderTransform = transformGroup,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
+            foreach (var anim in _STBShowResultImagePopIn.Children)
+            {
+                Storyboard.SetTarget(anim, _Image);
             }
 
-            foreach (var anim in _STBShowResultImage.Children)
+            _rand = (_rand + 1) % 2;
+
+            if (_rand == 0)
             {
-                Storyboard.SetTarget(anim, _NextImage);
+                _Image.Source = _BitmapOpenedMouth;
             }
 
-            _STBHideResultImage.Begin();
-            _STBShowResultImage.Begin();
+            if (_rand == 1)
+            {
+                _Image.Source = _BitmapClosedMouth;
+            }
 
-            Image _Temp = _CurrentImage;
-            _CurrentImage = _NextImage;
-            _NextImage = _Temp;
+            StackPanel_ResultImages.Children.Insert(0, _Image);
+
+            _STBShowResultImagePopIn.Begin();
+
+            if (StackPanel_ResultImages.Children.Count > 10)
+            {
+                StackPanel_ResultImages.Children.RemoveAt(10);
+            }
 
 
             TxtTotalCount.Text = (int.Parse(TxtTotalCount.Text) + 1).ToString();
@@ -138,24 +170,25 @@ namespace WPF.NETCore.UserControls
 
             closedMouth = (closedMouth + 1) % 2;
             openedMouth = (openedMouth + 1) % 2;
+
         }
 
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            ImgDemo.Source = ImageSourceDemo;
+            //ImgDemo.Source = ImageSourceDemo;
 
-            Task.Run(()=> 
-            { 
+            Task.Run(() =>
+            {
                 while (true)
                 {
                     this.Dispatcher.Invoke(() =>
                     {
                         ShowResult();
 
-                    });  
-                    Thread.Sleep(2000); 
-                } 
+                    });
+                    Thread.Sleep(2000);
+                }
             });
         }
 

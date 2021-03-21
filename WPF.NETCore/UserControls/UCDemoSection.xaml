@@ -94,76 +94,93 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="-50"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="STBShowResultPopIn">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Border Margin="30,30,0,30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FF838383" BorderThickness="1,1,1,1">
-            <Image x:Name="CameraPicture" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill"/>
-        </Border>
-        <Grid Grid.Column="1" Margin="30,30,30,30">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
+    <Border Padding="20,20,20,20">
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Border  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FF838383" BorderThickness="0,0,1,0" Grid.RowSpan="2">
-                <Grid>
-                    <Image Name="ImgDemo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="/Images/DemoImage.png" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,0" >
-                        <Image.Effect>
-                            <BlurEffect/>
-                        </Image.Effect>
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                    <Image Name="ImgDemo2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="/Images/DemoImage2.png" Opacity="0" RenderTransformOrigin="0.5,0.5" >
-                        <Image.Effect>
-                            <BlurEffect/>
-                        </Image.Effect>
-                        <Image.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Image.RenderTransform>
-                    </Image>
-                </Grid>
-            </Border>
-            <Border BorderBrush="#FFA2A2A2" BorderThickness="0,1,1,1" Grid.Column="1" Grid.RowSpan="2">
-                <Grid FlowDirection="RightToLeft">
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Style="{StaticResource StyleTextInfo}" Text="تعداد پسته :" HorizontalAlignment="Right"/>
-                    <TextBlock Grid.Row="1" Style="{StaticResource StyleTextInfo}" Text="خندان :" HorizontalAlignment="Right"/>
-                    <TextBlock Grid.Row="2" Style="{StaticResource StyleTextInfo}" Text="غیر خندان :" HorizontalAlignment="Right"/>
-                    <TextBlock Grid.Row="3" Style="{StaticResource StyleTextInfo}" Text="میانگین زمان :" HorizontalAlignment="Right"/>
-                    <TextBlock x:Name="TxtTotalCount" Grid.Row="0" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text="15"/>
-                    <TextBlock x:Name="TxtOpenedMouthCount" Grid.Row="1" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text="7"/>
-                    <TextBlock x:Name="TxtClosedMouthCount" Grid.Row="2" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text="8"/>
-                    <TextBlock x:Name="TxtAvgTime" Grid.Row="3" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text= "2ms"/>
-                </Grid>
-            </Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FF838383" BorderThickness="1,1,1,1">
+                    <Image x:Name="CameraPicture" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stretch="Fill"/>
+                </Border>
+                <Border Grid.Column="1" BorderThickness="0,1,0,0">
+                    <StackPanel x:Name="StackPanel_ResultImages">
+                        <Image x:Name="image" Source="/Images/DemoImage.png" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="50" Stretch="Fill" RenderTransformOrigin="0.5,0.5" >
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="1" Margin="30,30,30,30">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border BorderBrush="#FFA2A2A2" BorderThickness="1,1,1,1" Grid.Column="1" Grid.RowSpan="2">
+                    <Grid FlowDirection="RightToLeft">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Style="{StaticResource StyleTextInfo}" Text="تعداد پسته :" HorizontalAlignment="Right"/>
+                        <TextBlock Grid.Row="1" Style="{StaticResource StyleTextInfo}" Text="خندان :" HorizontalAlignment="Right"/>
+                        <TextBlock Grid.Row="2" Style="{StaticResource StyleTextInfo}" Text="غیر خندان :" HorizontalAlignment="Right"/>
+                        <TextBlock Grid.Row="3" Style="{StaticResource StyleTextInfo}" Text="میانگین زمان :" HorizontalAlignment="Right"/>
+                        <TextBlock x:Name="TxtTotalCount" Grid.Row="0" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text="15"/>
+                        <TextBlock x:Name="TxtOpenedMouthCount" Grid.Row="1" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text="7"/>
+                        <TextBlock x:Name="TxtClosedMouthCount" Grid.Row="2" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text="8"/>
+                        <TextBlock x:Name="TxtAvgTime" Grid.Row="3" Grid.Column="1" Style="{StaticResource StyleTextInfo2}" Text= "2ms"/>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </UserControl>
