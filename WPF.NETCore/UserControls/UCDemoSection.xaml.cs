@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Threading;
 using System.Windows.Media.Animation;
 using System.Threading.Tasks;
+using System.Windows.Threading;
+using WpfAnimatedGif;
 
 namespace WPF.NETCore.UserControls
 {
@@ -34,6 +36,15 @@ namespace WPF.NETCore.UserControls
         Storyboard _STBShowResultImage;
         Storyboard _STBHideResultImage;
         Storyboard _STBShowResultImagePopIn;
+        Storyboard _STBShowBackgroundProcessing;
+        Storyboard _STBHideBackgroundProcessing;
+        Storyboard _STBShowDemoPanelButtons;
+        Storyboard _STBHideDemoPanelButtons;
+
+        DispatcherTimer _TimerBackgroundProcessing = new DispatcherTimer();
+
+        private delegate void _DelegateProcess();
+        _DelegateProcess _Processing;
 
         public UCDemoSection()
         {
@@ -52,21 +63,42 @@ namespace WPF.NETCore.UserControls
             _STBShowResultImage = (Storyboard)this.FindResource("STBShowResultImage");
             _STBHideResultImage = (Storyboard)this.FindResource("STBHideResultImage");
             _STBShowResultImagePopIn = (Storyboard)this.FindResource("STBShowResultPopIn");
+            _STBShowBackgroundProcessing = (Storyboard)this.FindResource("STBShowBackgroundProcessing");
+            _STBHideBackgroundProcessing = (Storyboard)this.FindResource("STBHideBackgroundProcessing");
+
+
+
+            _TimerBackgroundProcessing.Tick += _Timer_Tick;
+            _TimerBackgroundProcessing.Interval = new TimeSpan(0, 0, 10);
+
+            var _ImageProcessingGIF = new BitmapImage();
+            _ImageProcessingGIF.BeginInit();
+            _ImageProcessingGIF.UriSource = new Uri("pack://application:,,,/Images/ProcessingGIF.gif");
+            _ImageProcessingGIF.EndInit();
+            ImageBehavior.SetAnimatedSource(ImgProcessingGIF, _ImageProcessingGIF);
+
+        }
+
+        public void Init(Storyboard STBShowDemoPanelButtons, Storyboard STBHideDemoPanelButtons)
+        {
+            _STBShowDemoPanelButtons = STBShowDemoPanelButtons;
+            _STBHideDemoPanelButtons = STBHideDemoPanelButtons;
         }
 
         public async void PowerCamera()
         {
             if (mVideoCapture == null)
             {
-                var task = Task.Run(() => { return new VideoCapture(0, VideoCapture.API.Any); });
-                mVideoCapture = await task;
-                mVideoCapture.FlipHorizontal = true;
-                mVideoCapture.ImageGrabbed += MVideoCapture_ImageGrabbed; ;
-                await Task.Run(() => mVideoCapture.Start());
+                await Task.Run(StartCamera);
+                _Processing += ShowResult;
+
+                _STBShowDemoPanelButtons.Begin();
             }
             else
             {
                 StopCamera();
+                _STBHideDemoPanelButtons.Begin();
+                _Processing -= ShowResult;
             }
 
         }
@@ -79,6 +111,18 @@ namespace WPF.NETCore.UserControls
                 mVideoCapture.Stop();
                 mVideoCapture = null;
             }
+        }
+
+        public async void StartCamera()
+        {
+            if (mVideoCapture == null)
+            {
+                var task = Task.Run(() => { return new VideoCapture(0, VideoCapture.API.Any); });
+                mVideoCapture = await task;
+                mVideoCapture.FlipHorizontal = true;
+                mVideoCapture.ImageGrabbed += MVideoCapture_ImageGrabbed; ;
+            }
+            await Task.Run(() => mVideoCapture.Start());
         }
 
         private void MVideoCapture_ImageGrabbed(object sender, EventArgs e)
@@ -98,6 +142,35 @@ namespace WPF.NETCore.UserControls
                                        System.Windows.Int32Rect.Empty,
                                        BitmapSizeOptions.FromWidthAndHeight(_Bitmap.Width, _Bitmap.Height));
                     CameraPicture.Source = _ImageSoruce;
+
+                });
+
+                Thread.Sleep(16);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
+
+        private void MVideoCapture_BackgroundProcessing(object sender, EventArgs e)
+        {
+
+            try
+            {
+                Mat _Image = new Mat();
+                mVideoCapture.Retrieve(_Image);
+                var _Bitmap = _Image.ToImage<Bgr, Byte>().ToBitmap();
+
+                this.Dispatcher.Invoke(() =>
+                {
+                    var _ImageSoruce = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                                       _Bitmap.GetHbitmap(),
+                                       IntPtr.Zero,
+                                       System.Windows.Int32Rect.Empty,
+                                       BitmapSizeOptions.FromWidthAndHeight(_Bitmap.Width, _Bitmap.Height));
+                    ImgBackgroundProcessing.Source = _ImageSoruce;
 
                 });
 
@@ -171,8 +244,8 @@ namespace WPF.NETCore.UserControls
             closedMouth = (closedMouth + 1) % 2;
             openedMouth = (openedMouth + 1) % 2;
 
-        }
 
+        }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -184,17 +257,59 @@ namespace WPF.NETCore.UserControls
                 {
                     this.Dispatcher.Invoke(() =>
                     {
-                        ShowResult();
+                        if (_Processing != null)
+                            _Processing();
 
                     });
                     Thread.Sleep(2000);
                 }
             });
+
+            //GIFProcessingWait.Source = new Uri(Environment.CurrentDirectory + @"/Images/ProcessingGIF2Transparent.gif");
+
         }
 
-        private void BtnTest_Click(object sender, RoutedEventArgs e)
+        public void StartBackgroundProcessing()
         {
-            ShowResult();
+            mVideoCapture.ImageGrabbed -= MVideoCapture_ImageGrabbed;
+            mVideoCapture.ImageGrabbed += MVideoCapture_BackgroundProcessing;
+
+            CTBackgroundProcessing.Visibility = Visibility.Visible;
+            _STBShowBackgroundProcessing.Begin();
+
+            //GIFProcessingWait.Play();
+
+            _TimerBackgroundProcessing.Start();
         }
+
+        public void StopBackgroundProcessing()
+        {
+            _STBHideBackgroundProcessing.Completed += _STBHideBackgroundProcessing_Completed;
+            _STBHideBackgroundProcessing.Begin();
+        }
+
+        private void _Timer_Tick(object sender, EventArgs e)
+        {
+            _TimerBackgroundProcessing.Stop();
+
+            StopBackgroundProcessing();
+        }
+
+        private void _STBHideBackgroundProcessing_Completed(object sender, EventArgs e)
+        {
+            mVideoCapture.ImageGrabbed -= MVideoCapture_BackgroundProcessing;
+            mVideoCapture.ImageGrabbed += MVideoCapture_ImageGrabbed;
+
+            //GIFProcessingWait.Stop();
+
+            CTBackgroundProcessing.Visibility = Visibility.Collapsed;
+        }
+
+        //private void GIFProcessingWait_MediaEnded(object sender, RoutedEventArgs e)
+        //{
+        //    GIFProcessingWait.Position = new TimeSpan(0, 0, 1);
+        //    GIFProcessingWait.Play();
+        //}
+
     }
 }

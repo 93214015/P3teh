@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\AdobeArabic-Bold.otf" />
+    <None Remove="Fonts\AdobeArabic-BoldItalic.otf" />
+    <None Remove="Fonts\AdobeArabic-Italic.otf" />
+    <None Remove="Fonts\AdobeArabic-Regular.otf" />
     <None Remove="Images\DemoImage.png" />
     <None Remove="Images\DemoImage2.png" />
     <None Remove="Images\Icons\CCTV Icon.png" />
@@ -14,15 +18,22 @@
     <None Remove="Images\Icons\Power Icon.png" />
     <None Remove="Images\Icons\Setting Icon.png" />
     <None Remove="Images\MainImage.png" />
+    <None Remove="Images\Monitor.svg" />
+    <None Remove="Images\ProcessingGIF.gif" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Emgu.CV" Version="4.5.1.4349" />
     <PackageReference Include="Emgu.CV.Bitmap" Version="4.5.1.4349" />
     <PackageReference Include="Emgu.CV.runtime.windows" Version="4.5.1.4349" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Fonts\AdobeArabic-Bold.otf" />
+    <Resource Include="Fonts\AdobeArabic-BoldItalic.otf" />
+    <Resource Include="Fonts\AdobeArabic-Italic.otf" />
+    <Resource Include="Fonts\AdobeArabic-Regular.otf" />
     <Resource Include="Images\DemoImage.png" />
     <Resource Include="Images\DemoImage2.png" />
     <Resource Include="Images\Icons\CCTV Icon.png">
@@ -38,6 +49,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\MainImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Monitor.svg" />
+    <Resource Include="Images\ProcessingGIF.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

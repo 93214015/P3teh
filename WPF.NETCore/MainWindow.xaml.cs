@@ -30,11 +30,18 @@ namespace WPF.NETCore
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        Storyboard _STBShowDemoPanelButtons;
+        Storyboard _STBHideDemoPanelButtons;
 
         public MainWindow()
         {
             InitializeComponent();
+
+
+            _STBShowDemoPanelButtons = (Storyboard)FindResource("STBShowDemoPanelButtons");
+            _STBHideDemoPanelButtons = (Storyboard)FindResource("STBHideDemoPanelButtons");
+
+            DemoPanel.Init(_STBShowDemoPanelButtons, _STBHideDemoPanelButtons);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -127,6 +134,11 @@ namespace WPF.NETCore
         private void BtnMinimizeWindow_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void BtnStartBackgroundProcessing_Click(object sender, RoutedEventArgs e)
+        {
+            DemoPanel.StartBackgroundProcessing();
         }
     }
 }
