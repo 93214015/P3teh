@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF.NETCore"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:UserControls="clr-namespace:WPF.NETCore.UserControls" x:Class="WPF.NETCore.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="804" ResizeMode="NoResize" Icon="/Images/MainImage.png" WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded" Background="{x:Null}" AllowsTransparency="True">
+        Title="MainWindow" Height="700" Width="1200" ResizeMode="NoResize" Icon="/Images/MainImage.png" WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded" Background="{x:Null}" AllowsTransparency="True">
     <Window.Resources>
         <Storyboard x:Key="STBStartApp">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnSetting" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
@@ -117,8 +117,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
 
 
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
@@ -514,7 +512,7 @@
                         <TranslateTransform X="50"/>
                     </TransformGroup>
                 </Border.RenderTransform>
-                <UserControls:UCDemoSection x:Name="DemoPanel" ImageSourceDemo="/Images/DemoImage.png"/>
+                <UserControls:UCDemoSection x:Name="DemoPanel"/>
             </Border>
             <Viewbox x:Name="BtnMenuLeft" Width="48" Height="48" VerticalAlignment="Center" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" MouseDown="BtnMenuLeft_MouseDown" Cursor="Hand" HorizontalAlignment="Left">
                 <Viewbox.RenderTransform>

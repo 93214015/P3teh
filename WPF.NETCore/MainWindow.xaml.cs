@@ -113,7 +113,7 @@ namespace WPF.NETCore
 
             if (mCurrentPanels == EPanels.Demo)
             {
-                DemoPanel.StopCamera();
+                DemoPanel.PowerCamera();
             }
 
             mCurrentPanels = EPanels.CCTV;

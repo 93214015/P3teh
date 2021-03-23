@@ -40,6 +40,7 @@ namespace WPF.NETCore.UserControls
         Storyboard _STBHideBackgroundProcessing;
         Storyboard _STBShowDemoPanelButtons;
         Storyboard _STBHideDemoPanelButtons;
+        Storyboard _STBShowBackgroundThumbnail;
 
         DispatcherTimer _TimerBackgroundProcessing = new DispatcherTimer();
 
@@ -50,13 +51,12 @@ namespace WPF.NETCore.UserControls
         {
             InitializeComponent();
 
-
             _BitmapOpenedMouth.BeginInit();
-            _BitmapOpenedMouth.UriSource = new Uri("pack://application:,,,/Images/DemoImage.png");
+            _BitmapOpenedMouth.UriSource = new Uri("pack://application:,,,/Images/p3teOpen.png");
             _BitmapOpenedMouth.EndInit();
 
             _BitmapClosedMouth.BeginInit();
-            _BitmapClosedMouth.UriSource = new Uri("pack://application:,,,/Images/DemoImage2.png");
+            _BitmapClosedMouth.UriSource = new Uri("pack://application:,,,/Images/p3teClose.png");
             _BitmapClosedMouth.EndInit();
 
 
@@ -65,6 +65,7 @@ namespace WPF.NETCore.UserControls
             _STBShowResultImagePopIn = (Storyboard)this.FindResource("STBShowResultPopIn");
             _STBShowBackgroundProcessing = (Storyboard)this.FindResource("STBShowBackgroundProcessing");
             _STBHideBackgroundProcessing = (Storyboard)this.FindResource("STBHideBackgroundProcessing");
+            _STBShowBackgroundThumbnail = (Storyboard)this.FindResource("STBShowBackgroundThumbnail");
 
 
 
@@ -202,8 +203,8 @@ namespace WPF.NETCore.UserControls
 
             Image _Image = new Image()
             {
-                Width = 50,
-                Height = 50,
+                Width = 30,
+                Height = 30,
                 Opacity = 0,
                 RenderTransform = transformGroup,
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -231,9 +232,9 @@ namespace WPF.NETCore.UserControls
 
             _STBShowResultImagePopIn.Begin();
 
-            if (StackPanel_ResultImages.Children.Count > 10)
+            if (StackPanel_ResultImages.Children.Count > 20)
             {
-                StackPanel_ResultImages.Children.RemoveAt(10);
+                StackPanel_ResultImages.Children.RemoveAt(20);
             }
 
 
@@ -303,6 +304,29 @@ namespace WPF.NETCore.UserControls
             //GIFProcessingWait.Stop();
 
             CTBackgroundProcessing.Visibility = Visibility.Collapsed;
+
+            ShowBackgroundThumbnail();
+            
+        }
+
+        private void ShowBackgroundThumbnail()
+        {
+            Mat _Image = new Mat();
+            mVideoCapture.Retrieve(_Image);
+            var _Bitmap = _Image.ToImage<Bgr, Byte>().ToBitmap();
+
+            this.Dispatcher.Invoke(() =>
+            {
+                var _ImageSoruce = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                                   _Bitmap.GetHbitmap(),
+                                   IntPtr.Zero,
+                                   System.Windows.Int32Rect.Empty,
+                                   BitmapSizeOptions.FromWidthAndHeight(_Bitmap.Width, _Bitmap.Height));
+                ImgBackgroundThumbnail.Source = _ImageSoruce;
+
+            });
+
+            _STBShowBackgroundThumbnail.Begin();
         }
 
         //private void GIFProcessingWait_MediaEnded(object sender, RoutedEventArgs e)

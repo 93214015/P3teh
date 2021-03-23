@@ -12,8 +12,8 @@
         <Color x:Key="ColorMainBtnLight">#648DE5</Color>
         <Color x:Key="ColorMainBtnDark">#FFF</Color>
         <Color x:Key="ColorMainRightBar">#000D30</Color>
-        <Color x:Key="ColorMouseOverLight">#3C6E71</Color>
-        <Color x:Key="ColorMouseOverDark">#3C6E71</Color>
+        <Color x:Key="ColorMouseOverLight">#f79499</Color>
+        <Color x:Key="ColorMouseOverDark">#f79499</Color>
 
 
         <SolidColorBrush x:Key="SolidBrushColorMainBackground" Color="{StaticResource ColorMainBackground}" />
@@ -21,7 +21,6 @@
         <SolidColorBrush x:Key="SolidBrushColorMainRightBar" Color="{StaticResource ColorMainRightBar}"/>
         <SolidColorBrush x:Key="SolidBrushColorMainBtnLight" Color="{StaticResource ColorMainBtnLight}"/>
         <SolidColorBrush x:Key="SolidBrushColorMainBtnDark" Color="{StaticResource ColorMainBtnDark}"/>
-
 
 
     </Application.Resources>
