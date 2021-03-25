@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF.NETCore"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:UserControls="clr-namespace:WPF.NETCore.UserControls" x:Class="WPF.NETCore.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1200" ResizeMode="NoResize" Icon="/Images/MainImage.png" WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded" Background="{x:Null}" AllowsTransparency="True">
+        Title="MainWindow" Height="700" Width="1200" ResizeMode="NoResize" Icon="/Images/MainImage.png" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" Background="{x:Null}">
     <Window.Resources>
         <Storyboard x:Key="STBStartApp">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnSetting" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">

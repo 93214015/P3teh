@@ -17,6 +17,7 @@ using System.Windows.Media.Animation;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using WpfAnimatedGif;
+using System.Linq;
 
 namespace WPF.NETCore.UserControls
 {
@@ -121,7 +122,9 @@ namespace WPF.NETCore.UserControls
                 var task = Task.Run(() => { return new VideoCapture(0, VideoCapture.API.Any); });
                 mVideoCapture = await task;
                 mVideoCapture.FlipHorizontal = true;
-                mVideoCapture.ImageGrabbed += MVideoCapture_ImageGrabbed; ;
+                mVideoCapture.ImageGrabbed += MVideoCapture_ImageGrabbed;
+
+                _ASEImageClassifier.LoadModel("", "model", true);
             }
             await Task.Run(() => mVideoCapture.Start());
         }
@@ -329,6 +332,18 @@ namespace WPF.NETCore.UserControls
             });
 
             _STBShowBackgroundThumbnail.Begin();
+        }
+
+        private ASE.ASEImageClassifier _ASEImageClassifier = new ASE.ASEImageClassifier();
+
+        private void BtnTestPrediction_Click(object sender, RoutedEventArgs e)
+        {
+            Mat _Image = new Mat();
+            mVideoCapture.Retrieve(_Image);
+            List<ASE.InMemoryImageData> _InputData = new List<ASE.InMemoryImageData>();
+            ASE.InMemoryImageData _Data = new ASE.InMemoryImageData(_Image.GetRawData(), "", "");
+            _InputData.Add(_Data);
+            var result  = _ASEImageClassifier.Classify(_InputData).ToList();
         }
 
         //private void GIFProcessingWait_MediaEnded(object sender, RoutedEventArgs e)

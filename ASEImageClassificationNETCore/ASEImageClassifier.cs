@@ -182,7 +182,6 @@ namespace ASE
 
             var _predictions = mMLContext.Data.CreateEnumerable<ImagePrediction>(_predictionData, reuseRowObject: true);
 
-
             return _predictions;
         }
 

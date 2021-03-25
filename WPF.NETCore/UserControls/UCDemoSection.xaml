@@ -273,6 +273,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                <Button Name="BtnTestPrediction" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnTestPrediction_Click">Predict</Button>
                 <Border BorderBrush="#FFA2A2A2" BorderThickness="0,0,1,0" Grid.Column="1" Grid.RowSpan="2">
                     <Grid x:Name="grid" FlowDirection="RightToLeft">
                         <Grid.RowDefinitions>
