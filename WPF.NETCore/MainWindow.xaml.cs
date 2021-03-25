@@ -30,11 +30,18 @@ namespace WPF.NETCore
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        Storyboard _STBShowDemoPanelButtons;
+        Storyboard _STBHideDemoPanelButtons;
 
         public MainWindow()
         {
             InitializeComponent();
+
+
+            _STBShowDemoPanelButtons = (Storyboard)FindResource("STBShowDemoPanelButtons");
+            _STBHideDemoPanelButtons = (Storyboard)FindResource("STBHideDemoPanelButtons");
+
+            DemoPanel.Init(_STBShowDemoPanelButtons, _STBHideDemoPanelButtons);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -88,12 +95,25 @@ namespace WPF.NETCore
 
         private void BtnCCTV_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        private EPanels mCurrentPanels = EPanels.CCTV;
+
+        private void BtnPower_Click(object sender, RoutedEventArgs e)
+        {
+            if (mCurrentPanels == EPanels.Demo)
+                DemoPanel.PowerCamera();
+        }
+
+        private void BtnHome_Click(object sender, RoutedEventArgs e)
+        {
             if (mCurrentPanels == EPanels.CCTV)
                 return;
 
             if (mCurrentPanels == EPanels.Demo)
             {
-                DemoPanel.StopCamera();
+                DemoPanel.PowerCamera();
             }
 
             mCurrentPanels = EPanels.CCTV;
@@ -106,12 +126,19 @@ namespace WPF.NETCore
             STBPanelsFadeOut.Begin();
         }
 
-        private EPanels mCurrentPanels = EPanels.CCTV;
-
-        private void BtnPower_Click(object sender, RoutedEventArgs e)
+        private void BtnCloseWindow_Click(object sender, RoutedEventArgs e)
         {
-            if (mCurrentPanels == EPanels.Demo)
-                DemoPanel.PowerCamera();
+            this.Close();
+        }
+
+        private void BtnMinimizeWindow_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void BtnStartBackgroundProcessing_Click(object sender, RoutedEventArgs e)
+        {
+            DemoPanel.StartBackgroundProcessing();
         }
     }
 }

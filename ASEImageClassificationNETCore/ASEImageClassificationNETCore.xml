@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ASEImageClassificationNETCore</name>
+    </assembly>
+    <members>
+        <member name="M:ASE.ASEImageClassifier.Train(System.String,System.Boolean,ASE.SET_LABEL_METHOD,ASE.EModelArchitecture,System.Boolean,System.Int32,System.Int32,System.Single,System.Single,ASE.ETrainEarlyStoppingCriteria,System.Boolean)">
+            <summary>
+            Train the model with images. this fucntion use InMemory Data. 
+            </summary>
+            <param name="_dataDirectoryPath">The directory of images</param>
+            <param name="_relativePath">Indicate that whether the specified directory is relative to the executable program file or not(absolute path)</param>
+            <param name="_setLabelMethodOnInputData">This paramter specify how the input images should be labeled(classified).</param>
+            <param name="_preTrainedModel">Select the pretrained model architecture</param>
+            <param name="_usePreviousTrainingCachedData">If you are using the same data(images) for training with the different parameter values, e.g. Epoch, BatchSize, LearningRate, you can set this parameter true to use previous cached data for faster training. Be aware, in the case of training with new data this paramter should be set to false.</param>
+            <param name="_epoch">The training iteration count</param>
+            <param name="_batchSize">Number of samples to use for mini-batch training</param>
+            <param name="_learningRate">Learning rate to use during optimization</param>
+            <param name="_validationDataFraction">The fraction of input images which will be used as the validation data for the model</param>
+            <param name="_earlyStoppingCriteria">Indicate the criteria for stopping the training iterations earlier regarding that metric. It could be disabled by setting the paramter to "None"</param>
+            <param name="_printOutputsToConsole">If set this parameter to true the training function will print out the progress in the console.</param>
+        </member>
+        <member name="M:ASE.ASEImageClassifier.Classify(System.String,System.Boolean,ASE.SET_LABEL_METHOD)">
+            <summary>
+            Classify the input images
+            </summary>
+            <param name="_dataDirectoryPath">The directory of images for classifying</param>
+            <param name="_isPathRelative">Indicate whether the directory path is reltive to program executbale directory or not</param>
+            <param name="_setLabelMethod">Indicate how input images should be labeled(classified). in the case of not-labeled input images set the parameter to "NoLabel". Labeled input images are usually used for testing the model.</param>
+        </member>
+        <member name="M:ASE.ASEImageClassifier.SaveModel(System.String,System.String,System.Boolean)">
+            <summary>
+            Save the model to .zip compatible file.
+            </summary>
+            <param name="_filePath">The directory used to save the model</param>
+            <param name="_fileName">The file name used for the model. The extension is not needed</param>
+            <param name="_isPathRelative">The specified path is relative to the program executable directory or not</param>
+        </member>
+        <member name="M:ASE.ASEImageClassifier.LoadModel(System.String,System.String,System.Boolean)">
+            <summary>
+            Loading saved model
+            </summary>
+            <param name="_filePath">The directory of saved model</param>
+            <param name="_fileName">File name of saved model. The extension is not needed</param>
+            <param name="_isPathRelative">Specify the file path is relative to the program executable directory or not</param>
+        </member>
+        <member name="M:ASE.ImageLoader.LoadImageData(Microsoft.ML.MLContext,System.String,ASE.SET_LABEL_METHOD,System.Boolean)">
+            <summary>
+            Load image data for classification.
+            </summary>
+            <param name="_mlContext">The Microsoft.ML Context Object</param>
+            <param name="_folder">The folder containing data. If load from source file (TSV or CSV) is selected then the file name should be included</param>
+            <param name="_setLabelMethod">The method for labeling(classifying) of data</param>
+            <param name="_shuffleRows">Shuffle the order of data to make some randomness</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

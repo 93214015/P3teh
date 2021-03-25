@@ -4,6 +4,24 @@
              xmlns:local="clr-namespace:WPF.NETCore"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <FontFamily x:Key="FontAdobeArabic">pack://application:,,,/Fonts/#Adobe Arabic</FontFamily>
+        
+        <Color x:Key="ColorMainBackground">#FFF</Color>
+        <Color x:Key="ColorMainTopBar">#304C89</Color>
+        <Color x:Key="ColorMainBtnLight">#648DE5</Color>
+        <Color x:Key="ColorMainBtnDark">#FFF</Color>
+        <Color x:Key="ColorMainRightBar">#000D30</Color>
+        <Color x:Key="ColorMouseOverLight">#f79499</Color>
+        <Color x:Key="ColorMouseOverDark">#f79499</Color>
+
+
+        <SolidColorBrush x:Key="SolidBrushColorMainBackground" Color="{StaticResource ColorMainBackground}" />
+        <SolidColorBrush x:Key="SolidBrushColorMainTopBar" Color="{StaticResource ColorMainTopBar}"/>
+        <SolidColorBrush x:Key="SolidBrushColorMainRightBar" Color="{StaticResource ColorMainRightBar}"/>
+        <SolidColorBrush x:Key="SolidBrushColorMainBtnLight" Color="{StaticResource ColorMainBtnLight}"/>
+        <SolidColorBrush x:Key="SolidBrushColorMainBtnDark" Color="{StaticResource ColorMainBtnDark}"/>
+
+
     </Application.Resources>
 </Application>
