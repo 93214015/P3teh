@@ -31,6 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ASEImageClassificationNETCore\ASEImageClassificationNETCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Fonts\AdobeArabic-Bold.otf" />
     <Resource Include="Fonts\AdobeArabic-BoldItalic.otf" />
     <Resource Include="Fonts\AdobeArabic-Italic.otf" />

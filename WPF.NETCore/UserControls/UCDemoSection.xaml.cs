@@ -133,7 +133,9 @@ namespace WPF.NETCore.UserControls
             {
                 Mat _Image = new Mat();
                 mVideoCapture.Retrieve(_Image);
-                var _Bitmap = _Image.ToImage<Bgr, Byte>().ToBitmap();
+                var _EmguImage = _Image.ToImage<Bgr, Byte>();
+                var _Bitmap = _EmguImage.ToBitmap();
+                
 
                 this.Dispatcher.Invoke(() =>
                 {
