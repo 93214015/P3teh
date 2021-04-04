@@ -33,6 +33,9 @@ namespace WPF.NETCore
         Storyboard _STBShowDemoPanelButtons;
         Storyboard _STBHideDemoPanelButtons;
 
+        private EPanels mCurrentPanels = EPanels.CCTV;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -88,7 +91,13 @@ namespace WPF.NETCore
 
 
             Storyboard STBPanelsFadeIn = (Storyboard)this.FindResource("STBPanelFadeIn");
-            border.Visibility = Visibility.Visible;
+
+            foreach(var anim in STBPanelsFadeIn.Children)
+            {
+                Storyboard.SetTarget(anim, PanelContainer_Demo);
+            }
+
+            PanelContainer_Demo.Visibility = Visibility.Visible;
             STBPanelsFadeIn.Begin();
 
         }
@@ -98,7 +107,6 @@ namespace WPF.NETCore
             
         }
 
-        private EPanels mCurrentPanels = EPanels.CCTV;
 
         private void BtnPower_Click(object sender, RoutedEventArgs e)
         {
@@ -116,14 +124,37 @@ namespace WPF.NETCore
                 DemoPanel.PowerCamera();
             }
 
-            mCurrentPanels = EPanels.CCTV;
 
             Storyboard STBImagePopIn = (Storyboard)this.FindResource("STBImagePopIn");
             STBImagePopIn.Begin();
 
 
+
+            Border _CurrentPanelContainer = null;
+            switch (mCurrentPanels)
+            {
+                case EPanels.Demo:
+                    _CurrentPanelContainer = PanelContainer_Demo;
+                    break;
+                case EPanels.CCTV:
+                    break;
+                case EPanels.Settings:
+                    _CurrentPanelContainer = PanelContainer_Settings;
+                    break;
+                default:
+                    break;
+            }
+
             Storyboard STBPanelsFadeOut = (Storyboard)this.FindResource("STBPanelFadeOut");
+
+            foreach(var anim in STBPanelsFadeOut.Children)
+            {
+                Storyboard.SetTarget(STBPanelsFadeOut, _CurrentPanelContainer);
+            }
+
             STBPanelsFadeOut.Begin();
+
+            mCurrentPanels = EPanels.CCTV;
         }
 
         private void BtnCloseWindow_Click(object sender, RoutedEventArgs e)
@@ -139,6 +170,27 @@ namespace WPF.NETCore
         private void BtnStartBackgroundProcessing_Click(object sender, RoutedEventArgs e)
         {
             DemoPanel.StartBackgroundProcessing();
+        }
+
+        private void BtnSetting_Click(object sender, RoutedEventArgs e)
+        {
+            if (mCurrentPanels == EPanels.Settings)
+                return;
+
+            Storyboard STBImagePopOut = (Storyboard)this.FindResource("STBImagePopOut");
+            STBImagePopOut.Begin();
+
+            Storyboard STBPanelsFadeIn = (Storyboard)this.FindResource("STBPanelFadeIn");
+
+            foreach (var anim in STBPanelsFadeIn.Children)
+            {
+                Storyboard.SetTarget(anim, PanelContainer_Settings);
+            }
+
+            PanelContainer_Settings.Visibility = Visibility.Visible;
+            STBPanelsFadeIn.Begin();
+
+            mCurrentPanels = EPanels.Settings;
         }
     }
 }

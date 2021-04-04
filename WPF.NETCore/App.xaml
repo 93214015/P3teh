@@ -5,23 +5,124 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        <FontFamily x:Key="FontAdobeArabic">pack://application:,,,/Fonts/#Adobe Arabic</FontFamily>
-        
-        <Color x:Key="ColorMainBackground">#FFF</Color>
-        <Color x:Key="ColorMainTopBar">#304C89</Color>
-        <Color x:Key="ColorMainBtnLight">#648DE5</Color>
-        <Color x:Key="ColorMainBtnDark">#FFF</Color>
-        <Color x:Key="ColorMainRightBar">#000D30</Color>
-        <Color x:Key="ColorMouseOverLight">#f79499</Color>
-        <Color x:Key="ColorMouseOverDark">#f79499</Color>
+        <ResourceDictionary>
+
+            <FontFamily x:Key="FontAdobeArabic">pack://application:,,,/Fonts/#Adobe Arabic</FontFamily>
+
+            <Color x:Key="ColorMainBackground">#FFF</Color>
+            <Color x:Key="ColorMainTopBar">#304C89</Color>
+            <Color x:Key="ColorMainBtnLight">#648DE5</Color>
+            <Color x:Key="ColorMainBtnDark">#FFF</Color>
+            <Color x:Key="ColorMainRightBar">#000D30</Color>
+            <Color x:Key="ColorMouseOverLight">#f79499</Color>
+            <Color x:Key="ColorMouseOverDark">#f79499</Color>
 
 
-        <SolidColorBrush x:Key="SolidBrushColorMainBackground" Color="{StaticResource ColorMainBackground}" />
-        <SolidColorBrush x:Key="SolidBrushColorMainTopBar" Color="{StaticResource ColorMainTopBar}"/>
-        <SolidColorBrush x:Key="SolidBrushColorMainRightBar" Color="{StaticResource ColorMainRightBar}"/>
-        <SolidColorBrush x:Key="SolidBrushColorMainBtnLight" Color="{StaticResource ColorMainBtnLight}"/>
-        <SolidColorBrush x:Key="SolidBrushColorMainBtnDark" Color="{StaticResource ColorMainBtnDark}"/>
+            <SolidColorBrush x:Key="SolidBrushColorMainBackground" Color="{StaticResource ColorMainBackground}" />
+            <SolidColorBrush x:Key="SolidBrushColorMainTopBar" Color="{StaticResource ColorMainTopBar}"/>
+            <SolidColorBrush x:Key="SolidBrushColorMainRightBar" Color="{StaticResource ColorMainRightBar}"/>
+            <SolidColorBrush x:Key="SolidBrushColorMainBtnLight" Color="{StaticResource ColorMainBtnLight}"/>
+            <SolidColorBrush x:Key="SolidBrushColorMainBtnDark" Color="{StaticResource ColorMainBtnDark}"/>
 
+
+            <ControlTemplate x:Key="CTRoundButtonDark" TargetType="{x:Type Button}">
+                <Grid Background="Transparent">
+                    <Ellipse x:Name="backgroundElement" Stroke="{TemplateBinding Foreground}"/>
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation
+                             Storyboard.TargetProperty="Foreground.Color"
+                             To="{StaticResource ColorMouseOverDark}"
+                             Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation
+                             Storyboard.TargetProperty="Foreground.Color"
+                             To="{StaticResource ColorMainBtnDark}"
+                             Duration="0:0:1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="ButtonBase.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                             To="1.15"
+                             Duration="0:0:.1" AutoReverse="true" />
+                                <DoubleAnimation
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                             To="1.15"
+                             Duration="0:0:.1" AutoReverse="true" />
+                                <ColorAnimation
+                             Storyboard.TargetProperty="(UIElement.OpacityMask).(SolidColorBrush.Color)"
+                             To="Transparent"
+                             Duration="0:0:.1" AutoReverse="true" />
+                            </Storyboard>
+
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <ControlTemplate x:Key="CTRoundButtonLight" TargetType="{x:Type Button}">
+                <Grid Background="Transparent">
+                    <Ellipse x:Name="backgroundElement" Stroke="{TemplateBinding Foreground}"/>
+                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation
+                             Storyboard.TargetProperty="Foreground.Color"
+                             To="{StaticResource ColorMouseOverLight}"
+                             Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation
+                             Storyboard.TargetProperty="Foreground.Color"
+                             To="{StaticResource ColorMainBtnLight}"
+                             Duration="0:0:1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="ButtonBase.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                             To="1.15"
+                             Duration="0:0:.1" AutoReverse="true" />
+                                <DoubleAnimation
+                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                             To="1.15"
+                             Duration="0:0:.1" AutoReverse="true" />
+                                <ColorAnimation
+                             Storyboard.TargetProperty="(UIElement.OpacityMask).(SolidColorBrush.Color)"
+                             To="Transparent"
+                             Duration="0:0:.1" AutoReverse="true" />
+                            </Storyboard>
+
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+
+
+        </ResourceDictionary>
 
     </Application.Resources>
 </Application>

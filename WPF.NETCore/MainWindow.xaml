@@ -8,339 +8,59 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1200" ResizeMode="NoResize" Icon="/Images/MainImage.png" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" Loaded="Window_Loaded" Background="{x:Null}">
     <Window.Resources>
-        <Storyboard x:Key="STBStartApp">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnSetting" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-22">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnSetting" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnDemo" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="22">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnDemo" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnCCTV" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnCCTV" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-20">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnPower" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TxtBlock_Time" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="STBLeftMenu">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnMenuLeft" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="STBLeftMenuReverse">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="-100">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnMenuLeft" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
-                <SplineDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BtnLeftMenuClose" Storyboard.TargetProperty="(FrameworkElement.Cursor)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:01">
-                    <DiscreteObjectKeyFrame.Value>
-                        <Cursor>Hand</Cursor>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BtnMenuLeft" Storyboard.TargetProperty="(FrameworkElement.Cursor)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000" Value="{x:Null}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:01">
-                    <DiscreteObjectKeyFrame.Value>
-                        <Cursor>Hand</Cursor>
-                    </DiscreteObjectKeyFrame.Value>
-                </DiscreteObjectKeyFrame>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
 
-        <Style x:Key="FocusVisual">
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/MainStoryboards.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="StyleRoundButton" TargetType="{x:Type Button}" >
+                <Setter Property="OpacityMask" Value="Black" />
+            </Style>
+            <Style x:Key="StyleRoundBtnTopBar" BasedOn="{StaticResource StyleRoundButton}" TargetType="Button">
+                <Setter Property="Template" Value="{StaticResource CTRoundButtonDark}"/>
+                <Setter Property="Foreground" Value="{StaticResource SolidBrushColorMainBtnDark}" />
+            </Style>
+            <Style x:Key="StyleRoundBtnRightBar" BasedOn="{StaticResource StyleRoundButton}" TargetType="Button">
+                <Setter Property="Template" Value="{StaticResource CTRoundButtonLight}"/>
+                <Setter Property="Foreground" Value="{StaticResource SolidBrushColorMainBtnLight}" />
+                <Setter Property="Margin" Value="0,5,0,5" />
+            </Style>
+
+            <Style x:Key="StyleRoundBtnWindows" BasedOn="{StaticResource StyleRoundButton}" TargetType="Button">
+                <Setter Property="Template" Value="{StaticResource CTRoundButtonLight}"/>
+                <Setter Property="Foreground" Value="{StaticResource SolidBrushColorMainBtnLight}" />
+                <Setter Property="Width" Value="15" />
+                <Setter Property="Height" Value="15" />
+            </Style>
 
 
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
-        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+            <Style x:Key="FocusVisual">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
 
+            <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+            <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+            <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+            <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+            <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+            <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+            <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+            <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+            <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
 
-        <ControlTemplate x:Key="CTRoundButtonDark" TargetType="{x:Type Button}">
-            <Grid Background="Transparent">
-                <Ellipse x:Name="backgroundElement" Stroke="{TemplateBinding Foreground}"/>
-                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-            </Grid>
-            <ControlTemplate.Triggers>
-                <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation
-                             Storyboard.TargetProperty="Foreground.Color"
-                             To="{StaticResource ColorMouseOverDark}"
-                             Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation
-                             Storyboard.TargetProperty="Foreground.Color"
-                             To="{StaticResource ColorMainBtnDark}"
-                             Duration="0:0:1" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="ButtonBase.Click">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation
-                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                             To="1.15"
-                             Duration="0:0:.1" AutoReverse="true" />
-                            <DoubleAnimation
-                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                             To="1.15"
-                             Duration="0:0:.1" AutoReverse="true" />
-                            <ColorAnimation
-                             Storyboard.TargetProperty="(UIElement.OpacityMask).(SolidColorBrush.Color)"
-                             To="Transparent"
-                             Duration="0:0:.1" AutoReverse="true" />
-                        </Storyboard>
-
-                    </BeginStoryboard>
-                </EventTrigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-        <ControlTemplate x:Key="CTRoundButtonLight" TargetType="{x:Type Button}">
-            <Grid Background="Transparent">
-                <Ellipse x:Name="backgroundElement" Stroke="{TemplateBinding Foreground}"/>
-                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-            </Grid>
-            <ControlTemplate.Triggers>
-                <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation
-                             Storyboard.TargetProperty="Foreground.Color"
-                             To="{StaticResource ColorMouseOverLight}"
-                             Duration="0:0:1" AutoReverse="True" RepeatBehavior="Forever" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation
-                             Storyboard.TargetProperty="Foreground.Color"
-                             To="{StaticResource ColorMainBtnLight}"
-                             Duration="0:0:1" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="ButtonBase.Click">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation
-                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                             To="1.15"
-                             Duration="0:0:.1" AutoReverse="true" />
-                            <DoubleAnimation
-                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                             To="1.15"
-                             Duration="0:0:.1" AutoReverse="true" />
-                            <ColorAnimation
-                             Storyboard.TargetProperty="(UIElement.OpacityMask).(SolidColorBrush.Color)"
-                             To="Transparent"
-                             Duration="0:0:.1" AutoReverse="true" />
-                        </Storyboard>
-
-                    </BeginStoryboard>
-                </EventTrigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-
-
-        <Style x:Key="StyleRoundButton" TargetType="{x:Type Button}" >
-            <Setter Property="OpacityMask" Value="Black" />
-        </Style>
-        <Style x:Key="StyleRoundBtnTopBar" BasedOn="{StaticResource StyleRoundButton}" TargetType="Button">
-            <Setter Property="Template" Value="{StaticResource CTRoundButtonDark}"/>
-            <Setter Property="Foreground" Value="{StaticResource SolidBrushColorMainBtnDark}" />
-        </Style>
-        <Style x:Key="StyleRoundBtnRightBar" BasedOn="{StaticResource StyleRoundButton}" TargetType="Button">
-            <Setter Property="Template" Value="{StaticResource CTRoundButtonLight}"/>
-            <Setter Property="Foreground" Value="{StaticResource SolidBrushColorMainBtnLight}" />
-            <Setter Property="Margin" Value="0,5,0,5" />
-        </Style>
-        <Style x:Key="StyleRoundBtnWindows" BasedOn="{StaticResource StyleRoundButton}" TargetType="Button">
-            <Setter Property="Template" Value="{StaticResource CTRoundButtonLight}"/>
-            <Setter Property="Foreground" Value="{StaticResource SolidBrushColorMainBtnLight}" />
-            <Setter Property="Width" Value="15" />
-            <Setter Property="Height" Value="15" />
-        </Style>
-
-
-
-        <Storyboard x:Key="STBFlashyFadeOut">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetName="_PathSettingIcon2" Storyboard.TargetProperty="(UIElement.OpacityMask).(SolidColorBrush.Color)">
-                <EasingColorKeyFrame KeyTime="00:00:00" Value="Black"/>
-                <EasingColorKeyFrame KeyTime="00:00:00.2000000" Value="Transparent"/>
-                <EasingColorKeyFrame KeyTime="00:00:00.3000000" Value="White"/>
-            </ColorAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetName="BtnSetting" Storyboard.TargetProperty="(UIElement.OpacityMask).(SolidColorBrush.Color)">
-                <EasingColorKeyFrame KeyTime="00:00:00" Value="#00A46666"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="STBPanelFadeIn">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1.1102230246251565E-16"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="49.999999999999993"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="STBPanelFadeOut">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-50"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="STBImagePopOut">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Collapsed}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-50"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="STBImagePopIn">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="50"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="STBShowDemoPanelButtons">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnStartBackgroundProcessing" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="30">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <QuinticEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <QuinticEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnStartBackgroundProcessing" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="STBHideDemoPanelButtons">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnStartBackgroundProcessing" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="30"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnStartBackgroundProcessing" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-
+        </ResourceDictionary>
 
     </Window.Resources>
+
+
     <DockPanel x:Name="MainDock" LastChildFill="True">
         <Border x:Name="WindowButtons" DockPanel.Dock="Top" Height="30" HorizontalAlignment="Stretch">
             <Border BorderThickness="1,1,1,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
@@ -381,7 +101,7 @@
         <Border x:Name="TopBar" Background="{StaticResource SolidBrushColorMainTopBar}" BorderThickness="0,0,0,1" BorderBrush="Black" DockPanel.Dock="Top">
             <Grid DockPanel.Dock="Top">
                 <StackPanel Height="50" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button x:Name="BtnSetting" Style="{DynamicResource StyleRoundBtnTopBar}" Foreground="{StaticResource SolidBrushColorMainBtnDark}" Canvas.Left="421" Width="45" Height="45" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" OpacityMask="Black" >
+                    <Button x:Name="BtnSetting" Style="{DynamicResource StyleRoundBtnTopBar}" Foreground="{StaticResource SolidBrushColorMainBtnDark}" Canvas.Left="421" Width="45" Height="45" BorderBrush="{x:Null}" Margin="10,0,10,0" RenderTransformOrigin="0.5,0.5" OpacityMask="Black" Click="BtnSetting_Click" >
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -503,7 +223,7 @@
         </Border>
         <Grid x:Name="MainPanel" Background="White">
             <!--<Image Source="Images/MainImage.png" Width="200" Canvas.Left="201" Canvas.Top="126.425"/>-->
-            <Border x:Name="border" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="20,0,0,0" Opacity="0" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" >
+            <Border x:Name="PanelContainer_Demo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="40,0,0,0" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" Opacity="0" >
                 <Border.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -512,8 +232,20 @@
                         <TranslateTransform X="50"/>
                     </TransformGroup>
                 </Border.RenderTransform>
-                <UserControls:UCDemoSection x:Name="DemoPanel"/>
+                    <UserControls:UCDemoSection x:Name="DemoPanel"/>
             </Border>
+            <Border x:Name="PanelContainer_Settings" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" Padding="40,0,0,0" Opacity="0" >
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="50"/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <UserControls:UCSettingsPanel x:Name="SettingsPanel"/>
+            </Border>
+
             <Viewbox x:Name="BtnMenuLeft" Width="48" Height="48" VerticalAlignment="Center" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" MouseDown="BtnMenuLeft_MouseDown" Cursor="Hand" HorizontalAlignment="Left">
                 <Viewbox.RenderTransform>
                     <TransformGroup>
