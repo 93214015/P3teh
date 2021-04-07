@@ -19,9 +19,21 @@ namespace WPF.NETCore.UserControls
     /// </summary>
     public partial class UCSettingsPanel : UserControl
     {
+
+
+
         public UCSettingsPanel()
         {
             InitializeComponent();
+
+            _STBShowNetworPanel = (Storyboard)FindResource("STBShowNetworkPanel");
+            _STBHideNetworPanel = (Storyboard)FindResource("STBHideNetworkPanel");
+            _STBHideNetworPanel.Completed += _STBHideNetworPanel_Completed;
+        }
+
+        private void _STBHideNetworPanel_Completed(object sender, EventArgs e)
+        {
+            PanelNetwork.Visibility = Visibility.Collapsed;
         }
 
         private void BtnSetting_MouseEnter(object sender, MouseEventArgs e)
@@ -37,5 +49,20 @@ namespace WPF.NETCore.UserControls
 
             _STBMouseLeave.Begin();
         }
+
+        private void BtnShowNetworks_Click(object sender, RoutedEventArgs e)
+        {
+            PanelNetwork.Visibility = Visibility.Visible;
+
+            _STBShowNetworPanel.Begin();
+        }
+
+        private void BtnCloseNetworkPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _STBHideNetworPanel.Begin();
+        }
+
+        private Storyboard _STBHideNetworPanel;
+        private Storyboard _STBShowNetworPanel;
     }
 }

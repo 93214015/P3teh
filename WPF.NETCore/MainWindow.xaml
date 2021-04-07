@@ -223,6 +223,17 @@
         </Border>
         <Grid x:Name="MainPanel" Background="White">
             <!--<Image Source="Images/MainImage.png" Width="200" Canvas.Left="201" Canvas.Top="126.425"/>-->
+            <Border x:Name="PanelContainer_Main" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="40,0,0,0" RenderTransformOrigin="0.5,0.5" Visibility="Visible" >
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="1"/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <UserControls:UCMainPanel x:Name="UCMainPanel"/>
+            </Border>
             <Border x:Name="PanelContainer_Demo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="40,0,0,0" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" Opacity="0" >
                 <Border.RenderTransform>
                     <TransformGroup>
@@ -260,16 +271,7 @@
                 </Canvas>
             </Viewbox>
             <!--<Image Source="Images/MainImage.png" Width="200" Canvas.Left="201" Canvas.Top="126.425"/>-->
-            <Image x:Name="MainImage" Source="Images/MainImage.png" Width="200" Canvas.Left="201" Canvas.Top="126.425" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
+            
             <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5" Width="100" HorizontalAlignment="Left">
                 <Grid.RowDefinitions>
                     <RowDefinition/>

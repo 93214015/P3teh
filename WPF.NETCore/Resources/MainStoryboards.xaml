@@ -133,8 +133,8 @@
             <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000" Value="{x:Static Visibility.Visible}"/>
         </ObjectAnimationUsingKeyFrames>
     </Storyboard>
-    
-    
+
+
     <Storyboard x:Key="STBPanelFadeOut">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)">
             <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
@@ -145,40 +145,8 @@
             <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="-50"/>
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
-    
-    
-    <Storyboard x:Key="STBImagePopOut">
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.Visibility)">
-            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-            <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Collapsed}"/>
-        </ObjectAnimationUsingKeyFrames>
-        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-            <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0"/>
-        </DoubleAnimationUsingKeyFrames>
-        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-            <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="-50"/>
-        </DoubleAnimationUsingKeyFrames>
-    </Storyboard>
-    
-    
-    <Storyboard x:Key="STBImagePopIn">
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.Visibility)">
-            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-            <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Visible}"/>
-        </ObjectAnimationUsingKeyFrames>
-        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="50"/>
-            <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0"/>
-        </DoubleAnimationUsingKeyFrames>
-        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainImage" Storyboard.TargetProperty="(UIElement.Opacity)">
-            <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-            <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="1"/>
-        </DoubleAnimationUsingKeyFrames>
-    </Storyboard>
-    
-    
+
+
     <Storyboard x:Key="STBShowDemoPanelButtons">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BtnStartBackgroundProcessing" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
             <EasingDoubleKeyFrame KeyTime="00:00:00" Value="30">

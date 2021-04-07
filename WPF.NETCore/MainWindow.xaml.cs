@@ -20,7 +20,7 @@ namespace WPF.NETCore
     enum EPanels
     {
         Demo,
-        CCTV,
+        Home,
         Settings
     }
 
@@ -33,8 +33,13 @@ namespace WPF.NETCore
         Storyboard _STBShowDemoPanelButtons;
         Storyboard _STBHideDemoPanelButtons;
 
-        private EPanels mCurrentPanels = EPanels.CCTV;
+        private EPanels mCurrentPanels = EPanels.Home;
 
+        private Border _CurrentUserControlContainer = null;
+
+        private Storyboard _STBPanelFadeOut = null;
+
+        Storyboard _STBPanelFadeIn = null;
 
         public MainWindow()
         {
@@ -45,6 +50,33 @@ namespace WPF.NETCore
             _STBHideDemoPanelButtons = (Storyboard)FindResource("STBHideDemoPanelButtons");
 
             DemoPanel.Init(_STBShowDemoPanelButtons, _STBHideDemoPanelButtons);
+
+            _CurrentUserControlContainer = PanelContainer_Main;
+
+            _STBPanelFadeOut = (Storyboard)this.FindResource("STBPanelFadeOut");
+            _STBPanelFadeOut.Completed += STBPanelsFadeOut_Completed;
+
+            _STBPanelFadeIn = (Storyboard)this.FindResource("STBPanelFadeIn");
+        }
+
+        private void ChangeUserControl(Border _NextUserControl)
+        {
+
+            Storyboard.SetTarget(_STBPanelFadeOut, _CurrentUserControlContainer);
+            _STBPanelFadeOut.Begin();
+            
+            Storyboard.SetTarget(_STBPanelFadeIn, _NextUserControl);
+
+            _NextUserControl.Visibility = Visibility.Visible;
+            _STBPanelFadeIn.Begin();
+
+            _CurrentUserControlContainer = _NextUserControl;
+        }
+
+        private void STBPanelsFadeOut_Completed(object sender, EventArgs e)
+        {
+            var _b = (Border)Storyboard.GetTarget(_STBPanelFadeOut);
+            _b.Visibility = Visibility.Collapsed;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -84,27 +116,15 @@ namespace WPF.NETCore
             if (mCurrentPanels == EPanels.Demo)
                 return;
 
+
+            ChangeUserControl(PanelContainer_Demo);
+
             mCurrentPanels = EPanels.Demo;
-
-            Storyboard STBImagePopOut = (Storyboard)this.FindResource("STBImagePopOut");
-            STBImagePopOut.Begin();
-
-
-            Storyboard STBPanelsFadeIn = (Storyboard)this.FindResource("STBPanelFadeIn");
-
-            foreach(var anim in STBPanelsFadeIn.Children)
-            {
-                Storyboard.SetTarget(anim, PanelContainer_Demo);
-            }
-
-            PanelContainer_Demo.Visibility = Visibility.Visible;
-            STBPanelsFadeIn.Begin();
-
         }
 
         private void BtnCCTV_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
 
@@ -116,7 +136,7 @@ namespace WPF.NETCore
 
         private void BtnHome_Click(object sender, RoutedEventArgs e)
         {
-            if (mCurrentPanels == EPanels.CCTV)
+            if (mCurrentPanels == EPanels.Home)
                 return;
 
             if (mCurrentPanels == EPanels.Demo)
@@ -124,37 +144,9 @@ namespace WPF.NETCore
                 DemoPanel.PowerCamera();
             }
 
+            ChangeUserControl(PanelContainer_Main);
 
-            Storyboard STBImagePopIn = (Storyboard)this.FindResource("STBImagePopIn");
-            STBImagePopIn.Begin();
-
-
-
-            Border _CurrentPanelContainer = null;
-            switch (mCurrentPanels)
-            {
-                case EPanels.Demo:
-                    _CurrentPanelContainer = PanelContainer_Demo;
-                    break;
-                case EPanels.CCTV:
-                    break;
-                case EPanels.Settings:
-                    _CurrentPanelContainer = PanelContainer_Settings;
-                    break;
-                default:
-                    break;
-            }
-
-            Storyboard STBPanelsFadeOut = (Storyboard)this.FindResource("STBPanelFadeOut");
-
-            foreach(var anim in STBPanelsFadeOut.Children)
-            {
-                Storyboard.SetTarget(STBPanelsFadeOut, _CurrentPanelContainer);
-            }
-
-            STBPanelsFadeOut.Begin();
-
-            mCurrentPanels = EPanels.CCTV;
+            mCurrentPanels = EPanels.Home;
         }
 
         private void BtnCloseWindow_Click(object sender, RoutedEventArgs e)
@@ -177,18 +169,20 @@ namespace WPF.NETCore
             if (mCurrentPanels == EPanels.Settings)
                 return;
 
-            Storyboard STBImagePopOut = (Storyboard)this.FindResource("STBImagePopOut");
-            STBImagePopOut.Begin();
+            ChangeUserControl(PanelContainer_Settings);
 
-            Storyboard STBPanelsFadeIn = (Storyboard)this.FindResource("STBPanelFadeIn");
+            //Storyboard STBImagePopOut = (Storyboard)this.FindResource("STBImagePopOut");
+            //STBImagePopOut.Begin();
 
-            foreach (var anim in STBPanelsFadeIn.Children)
-            {
-                Storyboard.SetTarget(anim, PanelContainer_Settings);
-            }
+            //Storyboard STBPanelsFadeIn = (Storyboard)this.FindResource("STBPanelFadeIn");
 
-            PanelContainer_Settings.Visibility = Visibility.Visible;
-            STBPanelsFadeIn.Begin();
+            //foreach (var anim in STBPanelsFadeIn.Children)
+            //{
+            //    Storyboard.SetTarget(anim, PanelContainer_Settings);
+            //}
+
+            //PanelContainer_Settings.Visibility = Visibility.Visible;
+            //STBPanelsFadeIn.Begin();
 
             mCurrentPanels = EPanels.Settings;
         }
