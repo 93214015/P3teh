@@ -89,7 +89,7 @@
                 </Button>
 
                 <Border Grid.Column="1" Margin="5,5,5,5" CornerRadius="5,5,5,5" BorderBrush="{DynamicResource SolidBrushColorMainRightBar}" BorderThickness="1,1,1,1">
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{DynamicResource FontAdobeArabic}" FontSize="18" Foreground="{DynamicResource SolidBrushColorMainRightBar}">شماره نسخه برنامه : 1.01</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{DynamicResource FontAdobeArabic}" FontSize="18" Foreground="{DynamicResource SolidBrushColorMainRightBar}">شماره نسخه برنامه : <Run Name="TxtAppVersion" Text="0.0" /></TextBlock>
                 </Border>
 
             </Grid>
@@ -181,7 +181,7 @@
                 </Border>
 
             </Grid>
-            <Grid x:Name="PanelNetwork" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="300" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Visibility="Visible" >
+            <Grid x:Name="PanelNetwork" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="300" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" Opacity="0" >
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

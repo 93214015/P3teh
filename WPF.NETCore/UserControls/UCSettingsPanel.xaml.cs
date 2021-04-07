@@ -29,6 +29,8 @@ namespace WPF.NETCore.UserControls
             _STBShowNetworPanel = (Storyboard)FindResource("STBShowNetworkPanel");
             _STBHideNetworPanel = (Storyboard)FindResource("STBHideNetworkPanel");
             _STBHideNetworPanel.Completed += _STBHideNetworPanel_Completed;
+
+            TxtAppVersion.Text = System.Reflection.Assembly.GetEntryAssembly().GetName().Version.ToString();
         }
 
         private void _STBHideNetworPanel_Completed(object sender, EventArgs e)
