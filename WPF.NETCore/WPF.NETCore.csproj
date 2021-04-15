@@ -18,6 +18,7 @@
     <None Remove="Images\Icons\Power Icon.png" />
     <None Remove="Images\Icons\Setting Icon.png" />
     <None Remove="Images\MainImage.png" />
+    <None Remove="Images\MainImageTransparent.png" />
     <None Remove="Images\p3teClose.png" />
     <None Remove="Images\p3teOpen.png" />
     <None Remove="Images\ProcessingGIF.gif" />
@@ -56,6 +57,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Icons\Setting Icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MainImageTransparent.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\p3teClose.png">

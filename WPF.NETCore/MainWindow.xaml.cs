@@ -65,7 +65,7 @@ namespace WPF.NETCore
 
             Storyboard.SetTarget(_STBPanelFadeOut, _CurrentUserControlContainer);
             _STBPanelFadeOut.Begin();
-            
+
             Storyboard.SetTarget(_STBPanelFadeIn, _NextUserControl);
 
             _NextUserControl.Visibility = Visibility.Visible;
@@ -136,8 +136,23 @@ namespace WPF.NETCore
 
         private void BtnPower_Click(object sender, RoutedEventArgs e)
         {
-            if (mCurrentPanels == EPanels.Demo)
-                DemoPanel.PowerCamera();
+            switch (mCurrentPanels)
+            {
+                case EPanels.Demo:
+                    DemoPanel.PowerCamera();
+                    break;
+
+                case EPanels.Home:
+                    if (!UCMainPanel.IsStarted)
+                    {
+                        UCMainPanel.StartOperations();
+                    }
+                    else
+                    {
+                        UCMainPanel.StopOperations();
+                    }
+                    break;
+            }
         }
 
         private void BtnHome_Click(object sender, RoutedEventArgs e)
