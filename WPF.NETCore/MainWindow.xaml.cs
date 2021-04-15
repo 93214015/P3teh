@@ -21,7 +21,8 @@ namespace WPF.NETCore
     {
         Demo,
         Home,
-        Settings
+        Settings,
+        CCTV
     }
 
 
@@ -124,7 +125,12 @@ namespace WPF.NETCore
 
         private void BtnCCTV_Click(object sender, RoutedEventArgs e)
         {
+            if (mCurrentPanels == EPanels.CCTV)
+                return;
 
+            ChangeUserControl(PanelContainer_CCTV);
+
+            mCurrentPanels = EPanels.CCTV;
         }
 
 
