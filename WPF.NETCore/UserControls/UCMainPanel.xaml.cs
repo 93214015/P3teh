@@ -25,6 +25,9 @@ namespace WPF.NETCore.UserControls
         Storyboard _STBStartMainImageFrameRotation = null;
         Storyboard _STBHideMainImageFrame = null;
         Storyboard _STBShowMainImageFrame = null;
+        Storyboard _STBShowInfoCards = null;
+
+        bool IsShowInfoCards = false;
 
         public UCMainPanel()
         {
@@ -47,6 +50,7 @@ namespace WPF.NETCore.UserControls
 
             _STBHideMainImageFrame = (Storyboard)FindResource("STBHideMainImageFrame");
             _STBShowMainImageFrame = (Storyboard)FindResource("STBShowMainImageFrame");
+            _STBShowInfoCards = (Storyboard)FindResource("STBShowInfoCards3");
         }
 
         public bool IsChecked { get; set; } = false;
@@ -60,6 +64,13 @@ namespace WPF.NETCore.UserControls
             if (!IsChecked)
             {
                 _Result = await StartChecking();
+
+            }
+
+            if (!IsShowInfoCards)
+            { 
+                _STBShowInfoCards.Begin();
+                IsShowInfoCards = true;
             }
 
             _STBShowMainImageFrame.Begin();
