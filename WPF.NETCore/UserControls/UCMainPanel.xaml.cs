@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,6 +30,9 @@ namespace WPF.NETCore.UserControls
 
         bool IsShowInfoCards = false;
 
+        delegate void UpateTickDelegate();
+        UpateTickDelegate _UpdateTick;
+
         public UCMainPanel()
         {
             InitializeComponent();
@@ -50,7 +54,21 @@ namespace WPF.NETCore.UserControls
 
             _STBHideMainImageFrame = (Storyboard)FindResource("STBHideMainImageFrame");
             _STBShowMainImageFrame = (Storyboard)FindResource("STBShowMainImageFrame");
-            _STBShowInfoCards = (Storyboard)FindResource("STBShowInfoCards3");
+            _STBShowInfoCards = (Storyboard)FindResource("STBShowInfoCards4");
+                       
+
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        if (_UpdateTick != null)
+                            _UpdateTick();
+                    });
+                    Thread.Sleep(2000);
+                }
+            });
         }
 
         public bool IsChecked { get; set; } = false;
@@ -78,6 +96,8 @@ namespace WPF.NETCore.UserControls
 
             IsStarted = true;
 
+            _UpdateTick += UpdateInfo;
+
             return _Result;
         }
         public void StopOperations()
@@ -86,12 +106,25 @@ namespace WPF.NETCore.UserControls
             _STBHideMainImageFrame.Begin();
 
             IsStarted = false;
+
+            _UpdateTick -= UpdateInfo;
         }
 
 
         private void BtnStartChecking_Click(object sender, RoutedEventArgs e)
         {
             StartChecking();
+        }
+
+        private int _InfoNum = 0;
+        private void UpdateInfo()
+        {
+            
+            TxtTotalCount.Text = _InfoNum.ToString();
+            TxtOpenedCount.Text = _InfoNum.ToString();
+            TxtClosedCount.Text = _InfoNum.ToString();
+
+            _InfoNum++;
         }
 
         private async Task<bool> StartChecking()
