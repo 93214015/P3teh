@@ -58,6 +58,8 @@ namespace WPF.NETCore
             _STBPanelFadeOut.Completed += STBPanelsFadeOut_Completed;
 
             _STBPanelFadeIn = (Storyboard)this.FindResource("STBPanelFadeIn");
+
+            gRPC.RPCClient.Init();
         }
 
         private void ChangeUserControl(Border _NextUserControl)

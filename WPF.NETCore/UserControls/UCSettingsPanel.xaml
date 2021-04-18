@@ -78,7 +78,7 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Button x:Name="BtnSetting" Template="{StaticResource CTRoundedBoxButtonDark}" Margin="5,5,5,5" Foreground="{DynamicResource SolidBrushColorMainBtnDark}" Background="{DynamicResource SolidBrushColorMainRightBar}" MouseEnter="BtnSetting_MouseEnter" MouseLeave="BtnSetting_MouseLeave">
+                <Button x:Name="BtnUpdate" Template="{StaticResource CTRoundedBoxButtonDark}" Margin="5,5,5,5" Foreground="{DynamicResource SolidBrushColorMainBtnDark}" Background="{DynamicResource SolidBrushColorMainRightBar}" MouseEnter="BtnSetting_MouseEnter" MouseLeave="BtnSetting_MouseLeave" Click="BtnUpdate_Click">
                     <Grid>
                         <Grid.OpacityMask>
                             <VisualBrush Visual="{Binding ElementName=_BtnSettingBorder}" />

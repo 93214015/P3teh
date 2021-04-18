@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "WPF.NETCore";
+
+package greet;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc GetAppFileList (google.protobuf.Empty) returns (MessageAppFileList);
+  rpc GetMessageList (MessageTextRequest) returns (MessageTextList);
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
+
+message MessageTextRequest
+{
+	int32 type = 1;
+}
+
+message MessageText{
+	int32 id = 1;
+	int32 type = 2;
+	google.protobuf.Timestamp date = 3;
+	string text = 4;
+}
+
+message MessageTextList{
+	repeated MessageText message_list = 1;
+}
+
+message MessageAppFile
+{
+	string file_path = 1;
+	google.protobuf.Timestamp write_time = 2;
+}
+
+message MessageAppFileList
+{
+	repeated MessageAppFile file_list = 1;
+}
