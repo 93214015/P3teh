@@ -80,6 +80,8 @@ namespace WPF.NETCore.UserControls
         {
             try
             {
+                await gRPC.RPCClient.SyncLogs();
+
                 gRPC.RPCClient.Subscribe();
 
                 var _ServerFiles = await gRPC.RPCClient.GetUpdateFiles();

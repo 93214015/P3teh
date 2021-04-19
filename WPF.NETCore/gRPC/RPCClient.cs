@@ -18,6 +18,7 @@ namespace WPF.NETCore.gRPC
     {
 
         const string m_ServerIPAddress = "https://87.236.212.221:5001";
+        //const string m_ServerIPAddress = "http://127.0.0.1:5001";
         static GrpcChannel m_Channel;
 
         public static void Init()
@@ -67,19 +68,23 @@ namespace WPF.NETCore.gRPC
                 {
                     foreach (var _Error in db.LogErrors.Where(error => error.Id > respose.LogErrorId).ToList())
                     {
-                        _MessageLogs.LogErrorList.Add(new MessageLog { Text = _Error.Context, Date = Timestamp.FromDateTime(_Error.Date) });
+                        _MessageLogs.LogErrorList.Add(new MessageLog { Text = _Error.Context, Date = Timestamp.FromDateTime(_Error.Date.ToUniversalTime()) });
                     }
 
                     foreach (var _Info in db.LogInfo.Where(info => info.Id > respose.LogInfoId).ToList())
                     {
-                        _MessageLogs.LogInfoList.Add(new MessageLog { Text = _Info.Context, Date = Timestamp.FromDateTime(_Info.Date) });
+                        _MessageLogs.LogInfoList.Add(new MessageLog { Text = _Info.Context, Date = Timestamp.FromDateTime(_Info.Date.ToUniversalTime()) });
                     }
                 }
 
-                await client.SendLogsAsync(_MessageLogs);
+                if (_MessageLogs.LogErrorList.Count > 0 || _MessageLogs.LogInfoList.Count > 0)
+                {
+                    await client.SendLogsAsync(_MessageLogs);
+                }
             }
-            catch
+            catch (Exception ex)
             {
+                MainWindow.ShowMessage(ex.Message);
                 MainWindow.ShowMessage("خطایی در ارتباط با سرور پیش آمده است");
             }
         }
@@ -113,9 +118,9 @@ namespace WPF.NETCore.gRPC
                 });
 
             }
-            catch 
+            catch
             {
-              MainWindow.ShowMessage("خطایی در ارتباط با سرور پیش آمده است");   
+                MainWindow.ShowMessage("خطایی در ارتباط با سرور پیش آمده است");
             }
         }
 

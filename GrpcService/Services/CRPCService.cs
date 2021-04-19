@@ -87,7 +87,19 @@ namespace GrpcService
             {
                 using (var db = new Database.AppDataBase())
                 {
-                    return new MessageLastLogID { LogErrorId = db.LogErrors.Last().Id, LogInfoId = db.LogInfo.Last().Id };
+                    var _LastLogInfoId = -1 ;
+                    if(db.LogInfo.Any())
+                    {
+                        _LastLogInfoId = db.LogInfo.OrderBy(x => x.Id).Last().Id;
+                    }
+
+                    var _LastLogErrorId = -1;
+                    if (db.LogErrors.Any())
+                    {
+                        _LastLogErrorId = db.LogErrors.OrderBy(x => x.Id).Last().Id;
+                    }
+
+                    return new MessageLastLogID { LogErrorId = _LastLogErrorId, LogInfoId = _LastLogInfoId };
                 }
             });
         }
@@ -107,6 +119,8 @@ namespace GrpcService
                     {
                         db.LogInfo.Add(new Database.DBLogInfo { Context = _LogInfo.Text, Date = _LogInfo.Date.ToDateTime() });
                     }
+
+                    db.SaveChanges();
                 }
 
                 return new Empty();
