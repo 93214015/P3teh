@@ -64,5 +64,22 @@ namespace GrpcService
             });
         }
 
+        public override async Task Subscribe(MessageSubscribe _MessageSubscribe
+            , IServerStreamWriter<MessageSubscribeResponse> _ResponseStream
+            , ServerCallContext context)
+        {
+            await Task.Run(async () =>
+            {
+                for (int i = 0; i < 5; ++i)
+                {
+                    await _ResponseStream.WriteAsync(new MessageSubscribeResponse { MethodName = "CallThisMethod()", Parameters = "Parameter0" });
+
+                    await Task.Delay(10000);
+
+                    await _ResponseStream.WriteAsync(new MessageSubscribeResponse { MethodName = "ShowMessage", Parameters = "Man Server Hastam! :D" });
+                }
+            });
+        }
+
     }
 }

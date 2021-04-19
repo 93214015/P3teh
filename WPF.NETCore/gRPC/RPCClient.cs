@@ -9,7 +9,7 @@ using Grpc.Net.Client.Configuration;
 using Grpc.Net.Client.Web;
 using Google.Protobuf.WellKnownTypes;
 using System.Threading.Tasks;
-
+using Grpc.Core;
 
 namespace WPF.NETCore.gRPC
 {
@@ -49,6 +49,32 @@ namespace WPF.NETCore.gRPC
             var client = new Greeter.GreeterClient(m_Channel);
             var _FileList = await client.GetAppFileListAsync(new Empty());
             return _FileList;
+        }
+
+        public static void Subscribe()
+        {
+            var client = new Greeter.GreeterClient(m_Channel);
+
+            var _SubscribedStream = client.Subscribe(new MessageSubscribe { Id = 0 });
+
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await foreach (var update in _SubscribedStream.ResponseStream.ReadAllAsync())
+                    {
+                        switch (update.MethodName)
+                        {
+                            case "ShowMessage":
+                                MainWindow.ShowMessage(update.Parameters);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                catch { }
+            });
         }
 
     }

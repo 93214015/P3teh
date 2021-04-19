@@ -51,6 +51,8 @@ namespace WPF.NETCore {
     static readonly grpc::Marshaller<global::WPF.NETCore.MessageAppFileList> __Marshaller_greet_MessageAppFileList = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageAppFileList.Parser));
     static readonly grpc::Marshaller<global::WPF.NETCore.MessageTextRequest> __Marshaller_greet_MessageTextRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageTextRequest.Parser));
     static readonly grpc::Marshaller<global::WPF.NETCore.MessageTextList> __Marshaller_greet_MessageTextList = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageTextList.Parser));
+    static readonly grpc::Marshaller<global::WPF.NETCore.MessageSubscribe> __Marshaller_greet_MessageSubscribe = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageSubscribe.Parser));
+    static readonly grpc::Marshaller<global::WPF.NETCore.MessageSubscribeResponse> __Marshaller_greet_MessageSubscribeResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageSubscribeResponse.Parser));
 
     static readonly grpc::Method<global::WPF.NETCore.HelloRequest, global::WPF.NETCore.HelloReply> __Method_SayHello = new grpc::Method<global::WPF.NETCore.HelloRequest, global::WPF.NETCore.HelloReply>(
         grpc::MethodType.Unary,
@@ -72,6 +74,13 @@ namespace WPF.NETCore {
         "GetMessageList",
         __Marshaller_greet_MessageTextRequest,
         __Marshaller_greet_MessageTextList);
+
+    static readonly grpc::Method<global::WPF.NETCore.MessageSubscribe, global::WPF.NETCore.MessageSubscribeResponse> __Method_Subscribe = new grpc::Method<global::WPF.NETCore.MessageSubscribe, global::WPF.NETCore.MessageSubscribeResponse>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "Subscribe",
+        __Marshaller_greet_MessageSubscribe,
+        __Marshaller_greet_MessageSubscribeResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -177,6 +186,14 @@ namespace WPF.NETCore {
       public virtual grpc::AsyncUnaryCall<global::WPF.NETCore.MessageTextList> GetMessageListAsync(global::WPF.NETCore.MessageTextRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetMessageList, null, options, request);
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::WPF.NETCore.MessageSubscribeResponse> Subscribe(global::WPF.NETCore.MessageSubscribe request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Subscribe(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::WPF.NETCore.MessageSubscribeResponse> Subscribe(global::WPF.NETCore.MessageSubscribe request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_Subscribe, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override GreeterClient NewInstance(ClientBaseConfiguration configuration)

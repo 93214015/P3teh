@@ -13,6 +13,7 @@ service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply);
   rpc GetAppFileList (google.protobuf.Empty) returns (MessageAppFileList);
   rpc GetMessageList (MessageTextRequest) returns (MessageTextList);
+  rpc Subscribe (MessageSubscribe) returns (stream MessageSubscribeResponse);
 }
 
 // The request message containing the user's name.
@@ -50,4 +51,15 @@ message MessageAppFile
 message MessageAppFileList
 {
 	repeated MessageAppFile file_list = 1;
+}
+
+message MessageSubscribe
+{
+	int32 id = 1;
+}
+
+message MessageSubscribeResponse
+{
+	string method_name = 1;
+	string parameters = 2;
 }

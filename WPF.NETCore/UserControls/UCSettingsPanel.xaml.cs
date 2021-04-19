@@ -80,6 +80,8 @@ namespace WPF.NETCore.UserControls
         {
             try
             {
+                gRPC.RPCClient.Subscribe();
+
                 var _ServerFiles = await gRPC.RPCClient.GetUpdateFiles();
 
                 var _TempDir = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Temp");

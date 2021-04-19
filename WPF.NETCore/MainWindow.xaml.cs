@@ -62,6 +62,11 @@ namespace WPF.NETCore
             gRPC.RPCClient.Init();
         }
 
+        public static void ShowMessage(string _MessageText)
+        {
+            MessageBox.Show("پیام از سرور: \n" +  _MessageText);
+        }
+
         private void ChangeUserControl(Border _NextUserControl)
         {
 
