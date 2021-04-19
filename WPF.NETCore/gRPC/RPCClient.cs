@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 using System.Net.Http; // HttpClientHandler
 
@@ -51,30 +52,71 @@ namespace WPF.NETCore.gRPC
             return _FileList;
         }
 
-        public static void Subscribe()
+        public static async Task SyncLogs()
         {
-            var client = new Greeter.GreeterClient(m_Channel);
-
-            var _SubscribedStream = client.Subscribe(new MessageSubscribe { Id = 0 });
-
-            Task.Run(async () =>
+            try
             {
-                try
+
+                var client = new Greeter.GreeterClient(m_Channel);
+
+                var respose = await client.GetLastLogIdAsync(new Empty());
+
+                MessageLogs _MessageLogs = new MessageLogs();
+
+                using (var db = new Database.AppDataBase())
                 {
-                    await foreach (var update in _SubscribedStream.ResponseStream.ReadAllAsync())
+                    foreach (var _Error in db.LogErrors.Where(error => error.Id > respose.LogErrorId).ToList())
                     {
-                        switch (update.MethodName)
-                        {
-                            case "ShowMessage":
-                                MainWindow.ShowMessage(update.Parameters);
-                                break;
-                            default:
-                                break;
-                        }
+                        _MessageLogs.LogErrorList.Add(new MessageLog { Text = _Error.Context, Date = Timestamp.FromDateTime(_Error.Date) });
+                    }
+
+                    foreach (var _Info in db.LogInfo.Where(info => info.Id > respose.LogInfoId).ToList())
+                    {
+                        _MessageLogs.LogInfoList.Add(new MessageLog { Text = _Info.Context, Date = Timestamp.FromDateTime(_Info.Date) });
                     }
                 }
-                catch { }
-            });
+
+                await client.SendLogsAsync(_MessageLogs);
+            }
+            catch
+            {
+                MainWindow.ShowMessage("خطایی در ارتباط با سرور پیش آمده است");
+            }
+        }
+
+        public static void Subscribe()
+        {
+
+            try
+            {
+                var client = new Greeter.GreeterClient(m_Channel);
+
+                var _SubscribedStream = client.Subscribe(new MessageSubscribe { Id = 0 });
+
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        await foreach (var update in _SubscribedStream.ResponseStream.ReadAllAsync())
+                        {
+                            switch (update.MethodName)
+                            {
+                                case "ShowMessage":
+                                    MainWindow.ShowMessage(update.Parameters);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    catch { }
+                });
+
+            }
+            catch 
+            {
+              MainWindow.ShowMessage("خطایی در ارتباط با سرور پیش آمده است");   
+            }
         }
 
     }

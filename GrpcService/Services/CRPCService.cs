@@ -81,5 +81,37 @@ namespace GrpcService
             });
         }
 
+        public override Task<MessageLastLogID> GetLastLogId(Empty _null, ServerCallContext context)
+        {
+            return Task.Run(() =>
+            {
+                using (var db = new Database.AppDataBase())
+                {
+                    return new MessageLastLogID { LogErrorId = db.LogErrors.Last().Id, LogInfoId = db.LogInfo.Last().Id };
+                }
+            });
+        }
+
+        public override Task<Empty> SendLogs(MessageLogs request, ServerCallContext context)
+        {
+            return Task.Run(() =>
+            {
+                using (var db = new Database.AppDataBase())
+                {
+                    foreach (var _LogError in request.LogErrorList.ToList())
+                    {
+                        db.LogErrors.Add(new Database.DBLogError { Context = _LogError.Text, Date = _LogError.Date.ToDateTime() });
+                    }
+
+                    foreach (var _LogInfo in request.LogInfoList.ToList())
+                    {
+                        db.LogInfo.Add(new Database.DBLogInfo { Context = _LogInfo.Text, Date = _LogInfo.Date.ToDateTime() });
+                    }
+                }
+
+                return new Empty();
+            });
+        }
+
     }
 }

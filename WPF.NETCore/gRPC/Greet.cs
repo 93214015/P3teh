@@ -37,13 +37,21 @@ namespace WPF.NETCore {
             "KAoJZmlsZV9saXN0GAEgAygLMhUuZ3JlZXQuTWVzc2FnZUFwcEZpbGUiHgoQ",
             "TWVzc2FnZVN1YnNjcmliZRIKCgJpZBgBIAEoBSJDChhNZXNzYWdlU3Vic2Ny",
             "aWJlUmVzcG9uc2USEwoLbWV0aG9kX25hbWUYASABKAkSEgoKcGFyYW1ldGVy",
-            "cxgCIAEoCTKQAgoHR3JlZXRlchIyCghTYXlIZWxsbxITLmdyZWV0LkhlbGxv",
-            "UmVxdWVzdBoRLmdyZWV0LkhlbGxvUmVwbHkSQwoOR2V0QXBwRmlsZUxpc3QS",
-            "Fi5nb29nbGUucHJvdG9idWYuRW1wdHkaGS5ncmVldC5NZXNzYWdlQXBwRmls",
-            "ZUxpc3QSQwoOR2V0TWVzc2FnZUxpc3QSGS5ncmVldC5NZXNzYWdlVGV4dFJl",
-            "cXVlc3QaFi5ncmVldC5NZXNzYWdlVGV4dExpc3QSRwoJU3Vic2NyaWJlEhcu",
-            "Z3JlZXQuTWVzc2FnZVN1YnNjcmliZRofLmdyZWV0Lk1lc3NhZ2VTdWJzY3Jp",
-            "YmVSZXNwb25zZTABQg6qAgtXUEYuTkVUQ29yZWIGcHJvdG8z"));
+            "cxgCIAEoCSI9ChBNZXNzYWdlTGFzdExvZ0lEEhMKC2xvZ19pbmZvX2lkGAEg",
+            "ASgFEhQKDGxvZ19lcnJvcl9pZBgCIAEoBSJECgpNZXNzYWdlTG9nEgwKBHRl",
+            "eHQYASABKAkSKAoEZGF0ZRgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1l",
+            "c3RhbXAiYgoLTWVzc2FnZUxvZ3MSKQoObG9nX2Vycm9yX2xpc3QYASADKAsy",
+            "ES5ncmVldC5NZXNzYWdlTG9nEigKDWxvZ19pbmZvX2xpc3QYAiADKAsyES5n",
+            "cmVldC5NZXNzYWdlTG9nMokDCgdHcmVldGVyEjIKCFNheUhlbGxvEhMuZ3Jl",
+            "ZXQuSGVsbG9SZXF1ZXN0GhEuZ3JlZXQuSGVsbG9SZXBseRJDCg5HZXRBcHBG",
+            "aWxlTGlzdBIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoZLmdyZWV0Lk1lc3Nh",
+            "Z2VBcHBGaWxlTGlzdBJDCg5HZXRNZXNzYWdlTGlzdBIZLmdyZWV0Lk1lc3Nh",
+            "Z2VUZXh0UmVxdWVzdBoWLmdyZWV0Lk1lc3NhZ2VUZXh0TGlzdBI/CgxHZXRM",
+            "YXN0TG9nSWQSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaFy5ncmVldC5NZXNz",
+            "YWdlTGFzdExvZ0lEEjYKCFNlbmRMb2dzEhIuZ3JlZXQuTWVzc2FnZUxvZ3Ma",
+            "Fi5nb29nbGUucHJvdG9idWYuRW1wdHkSRwoJU3Vic2NyaWJlEhcuZ3JlZXQu",
+            "TWVzc2FnZVN1YnNjcmliZRofLmdyZWV0Lk1lc3NhZ2VTdWJzY3JpYmVSZXNw",
+            "b25zZTABQg6qAgtXUEYuTkVUQ29yZWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -55,7 +63,10 @@ namespace WPF.NETCore {
             new pbr::GeneratedClrTypeInfo(typeof(global::WPF.NETCore.MessageAppFile), global::WPF.NETCore.MessageAppFile.Parser, new[]{ "FilePath", "WriteTime" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::WPF.NETCore.MessageAppFileList), global::WPF.NETCore.MessageAppFileList.Parser, new[]{ "FileList" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::WPF.NETCore.MessageSubscribe), global::WPF.NETCore.MessageSubscribe.Parser, new[]{ "Id" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::WPF.NETCore.MessageSubscribeResponse), global::WPF.NETCore.MessageSubscribeResponse.Parser, new[]{ "MethodName", "Parameters" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::WPF.NETCore.MessageSubscribeResponse), global::WPF.NETCore.MessageSubscribeResponse.Parser, new[]{ "MethodName", "Parameters" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::WPF.NETCore.MessageLastLogID), global::WPF.NETCore.MessageLastLogID.Parser, new[]{ "LogInfoId", "LogErrorId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::WPF.NETCore.MessageLog), global::WPF.NETCore.MessageLog.Parser, new[]{ "Text", "Date" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::WPF.NETCore.MessageLogs), global::WPF.NETCore.MessageLogs.Parser, new[]{ "LogErrorList", "LogInfoList" }, null, null, null, null)
           }));
     }
     #endregion
@@ -1783,6 +1794,617 @@ namespace WPF.NETCore {
           }
           case 18: {
             Parameters = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class MessageLastLogID : pb::IMessage<MessageLastLogID>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<MessageLastLogID> _parser = new pb::MessageParser<MessageLastLogID>(() => new MessageLastLogID());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MessageLastLogID> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::WPF.NETCore.GreetReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MessageLastLogID() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MessageLastLogID(MessageLastLogID other) : this() {
+      logInfoId_ = other.logInfoId_;
+      logErrorId_ = other.logErrorId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MessageLastLogID Clone() {
+      return new MessageLastLogID(this);
+    }
+
+    /// <summary>Field number for the "log_info_id" field.</summary>
+    public const int LogInfoIdFieldNumber = 1;
+    private int logInfoId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int LogInfoId {
+      get { return logInfoId_; }
+      set {
+        logInfoId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "log_error_id" field.</summary>
+    public const int LogErrorIdFieldNumber = 2;
+    private int logErrorId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int LogErrorId {
+      get { return logErrorId_; }
+      set {
+        logErrorId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MessageLastLogID);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MessageLastLogID other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (LogInfoId != other.LogInfoId) return false;
+      if (LogErrorId != other.LogErrorId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (LogInfoId != 0) hash ^= LogInfoId.GetHashCode();
+      if (LogErrorId != 0) hash ^= LogErrorId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (LogInfoId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(LogInfoId);
+      }
+      if (LogErrorId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(LogErrorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (LogInfoId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(LogInfoId);
+      }
+      if (LogErrorId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(LogErrorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (LogInfoId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(LogInfoId);
+      }
+      if (LogErrorId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(LogErrorId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MessageLastLogID other) {
+      if (other == null) {
+        return;
+      }
+      if (other.LogInfoId != 0) {
+        LogInfoId = other.LogInfoId;
+      }
+      if (other.LogErrorId != 0) {
+        LogErrorId = other.LogErrorId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            LogInfoId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            LogErrorId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            LogInfoId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            LogErrorId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class MessageLog : pb::IMessage<MessageLog>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<MessageLog> _parser = new pb::MessageParser<MessageLog>(() => new MessageLog());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MessageLog> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::WPF.NETCore.GreetReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MessageLog() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MessageLog(MessageLog other) : this() {
+      text_ = other.text_;
+      date_ = other.date_ != null ? other.date_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MessageLog Clone() {
+      return new MessageLog(this);
+    }
+
+    /// <summary>Field number for the "text" field.</summary>
+    public const int TextFieldNumber = 1;
+    private string text_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Text {
+      get { return text_; }
+      set {
+        text_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "date" field.</summary>
+    public const int DateFieldNumber = 3;
+    private global::Google.Protobuf.WellKnownTypes.Timestamp date_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Google.Protobuf.WellKnownTypes.Timestamp Date {
+      get { return date_; }
+      set {
+        date_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MessageLog);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MessageLog other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Text != other.Text) return false;
+      if (!object.Equals(Date, other.Date)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Text.Length != 0) hash ^= Text.GetHashCode();
+      if (date_ != null) hash ^= Date.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Text.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Text);
+      }
+      if (date_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Date);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Text.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(Text);
+      }
+      if (date_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Date);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Text.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Text);
+      }
+      if (date_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Date);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MessageLog other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Text.Length != 0) {
+        Text = other.Text;
+      }
+      if (other.date_ != null) {
+        if (date_ == null) {
+          Date = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+        }
+        Date.MergeFrom(other.Date);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            Text = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (date_ == null) {
+              Date = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(Date);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            Text = input.ReadString();
+            break;
+          }
+          case 26: {
+            if (date_ == null) {
+              Date = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(Date);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class MessageLogs : pb::IMessage<MessageLogs>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<MessageLogs> _parser = new pb::MessageParser<MessageLogs>(() => new MessageLogs());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<MessageLogs> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::WPF.NETCore.GreetReflection.Descriptor.MessageTypes[11]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MessageLogs() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MessageLogs(MessageLogs other) : this() {
+      logErrorList_ = other.logErrorList_.Clone();
+      logInfoList_ = other.logInfoList_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public MessageLogs Clone() {
+      return new MessageLogs(this);
+    }
+
+    /// <summary>Field number for the "log_error_list" field.</summary>
+    public const int LogErrorListFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::WPF.NETCore.MessageLog> _repeated_logErrorList_codec
+        = pb::FieldCodec.ForMessage(10, global::WPF.NETCore.MessageLog.Parser);
+    private readonly pbc::RepeatedField<global::WPF.NETCore.MessageLog> logErrorList_ = new pbc::RepeatedField<global::WPF.NETCore.MessageLog>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::WPF.NETCore.MessageLog> LogErrorList {
+      get { return logErrorList_; }
+    }
+
+    /// <summary>Field number for the "log_info_list" field.</summary>
+    public const int LogInfoListFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::WPF.NETCore.MessageLog> _repeated_logInfoList_codec
+        = pb::FieldCodec.ForMessage(18, global::WPF.NETCore.MessageLog.Parser);
+    private readonly pbc::RepeatedField<global::WPF.NETCore.MessageLog> logInfoList_ = new pbc::RepeatedField<global::WPF.NETCore.MessageLog>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::WPF.NETCore.MessageLog> LogInfoList {
+      get { return logInfoList_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as MessageLogs);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(MessageLogs other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!logErrorList_.Equals(other.logErrorList_)) return false;
+      if(!logInfoList_.Equals(other.logInfoList_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= logErrorList_.GetHashCode();
+      hash ^= logInfoList_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      logErrorList_.WriteTo(output, _repeated_logErrorList_codec);
+      logInfoList_.WriteTo(output, _repeated_logInfoList_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      logErrorList_.WriteTo(ref output, _repeated_logErrorList_codec);
+      logInfoList_.WriteTo(ref output, _repeated_logInfoList_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += logErrorList_.CalculateSize(_repeated_logErrorList_codec);
+      size += logInfoList_.CalculateSize(_repeated_logInfoList_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(MessageLogs other) {
+      if (other == null) {
+        return;
+      }
+      logErrorList_.Add(other.logErrorList_);
+      logInfoList_.Add(other.logInfoList_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            logErrorList_.AddEntriesFrom(input, _repeated_logErrorList_codec);
+            break;
+          }
+          case 18: {
+            logInfoList_.AddEntriesFrom(input, _repeated_logInfoList_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            logErrorList_.AddEntriesFrom(ref input, _repeated_logErrorList_codec);
+            break;
+          }
+          case 18: {
+            logInfoList_.AddEntriesFrom(ref input, _repeated_logInfoList_codec);
             break;
           }
         }

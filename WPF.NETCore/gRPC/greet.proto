@@ -13,6 +13,8 @@ service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply);
   rpc GetAppFileList (google.protobuf.Empty) returns (MessageAppFileList);
   rpc GetMessageList (MessageTextRequest) returns (MessageTextList);
+  rpc GetLastLogId (google.protobuf.Empty) returns (MessageLastLogID);
+  rpc SendLogs (MessageLogs) returns (google.protobuf.Empty);
   rpc Subscribe (MessageSubscribe) returns (stream MessageSubscribeResponse);
 }
 
@@ -62,4 +64,22 @@ message MessageSubscribeResponse
 {
 	string method_name = 1;
 	string parameters = 2;
+}
+
+message MessageLastLogID
+{
+	int32 log_info_id = 1;
+	int32 log_error_id = 2;
+}
+
+message MessageLog
+{
+	string text = 1;
+	google.protobuf.Timestamp date = 3;
+}
+
+message MessageLogs
+{
+	repeated MessageLog log_error_list = 1;
+	repeated MessageLog log_info_list = 2;
 }

@@ -51,6 +51,8 @@ namespace WPF.NETCore {
     static readonly grpc::Marshaller<global::WPF.NETCore.MessageAppFileList> __Marshaller_greet_MessageAppFileList = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageAppFileList.Parser));
     static readonly grpc::Marshaller<global::WPF.NETCore.MessageTextRequest> __Marshaller_greet_MessageTextRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageTextRequest.Parser));
     static readonly grpc::Marshaller<global::WPF.NETCore.MessageTextList> __Marshaller_greet_MessageTextList = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageTextList.Parser));
+    static readonly grpc::Marshaller<global::WPF.NETCore.MessageLastLogID> __Marshaller_greet_MessageLastLogID = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageLastLogID.Parser));
+    static readonly grpc::Marshaller<global::WPF.NETCore.MessageLogs> __Marshaller_greet_MessageLogs = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageLogs.Parser));
     static readonly grpc::Marshaller<global::WPF.NETCore.MessageSubscribe> __Marshaller_greet_MessageSubscribe = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageSubscribe.Parser));
     static readonly grpc::Marshaller<global::WPF.NETCore.MessageSubscribeResponse> __Marshaller_greet_MessageSubscribeResponse = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::WPF.NETCore.MessageSubscribeResponse.Parser));
 
@@ -74,6 +76,20 @@ namespace WPF.NETCore {
         "GetMessageList",
         __Marshaller_greet_MessageTextRequest,
         __Marshaller_greet_MessageTextList);
+
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::WPF.NETCore.MessageLastLogID> __Method_GetLastLogId = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::WPF.NETCore.MessageLastLogID>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetLastLogId",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_greet_MessageLastLogID);
+
+    static readonly grpc::Method<global::WPF.NETCore.MessageLogs, global::Google.Protobuf.WellKnownTypes.Empty> __Method_SendLogs = new grpc::Method<global::WPF.NETCore.MessageLogs, global::Google.Protobuf.WellKnownTypes.Empty>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "SendLogs",
+        __Marshaller_greet_MessageLogs,
+        __Marshaller_google_protobuf_Empty);
 
     static readonly grpc::Method<global::WPF.NETCore.MessageSubscribe, global::WPF.NETCore.MessageSubscribeResponse> __Method_Subscribe = new grpc::Method<global::WPF.NETCore.MessageSubscribe, global::WPF.NETCore.MessageSubscribeResponse>(
         grpc::MethodType.ServerStreaming,
@@ -186,6 +202,38 @@ namespace WPF.NETCore {
       public virtual grpc::AsyncUnaryCall<global::WPF.NETCore.MessageTextList> GetMessageListAsync(global::WPF.NETCore.MessageTextRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetMessageList, null, options, request);
+      }
+      public virtual global::WPF.NETCore.MessageLastLogID GetLastLogId(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetLastLogId(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::WPF.NETCore.MessageLastLogID GetLastLogId(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetLastLogId, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::WPF.NETCore.MessageLastLogID> GetLastLogIdAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetLastLogIdAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::WPF.NETCore.MessageLastLogID> GetLastLogIdAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetLastLogId, null, options, request);
+      }
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty SendLogs(global::WPF.NETCore.MessageLogs request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SendLogs(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty SendLogs(global::WPF.NETCore.MessageLogs request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_SendLogs, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> SendLogsAsync(global::WPF.NETCore.MessageLogs request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return SendLogsAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Google.Protobuf.WellKnownTypes.Empty> SendLogsAsync(global::WPF.NETCore.MessageLogs request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_SendLogs, null, options, request);
       }
       public virtual grpc::AsyncServerStreamingCall<global::WPF.NETCore.MessageSubscribeResponse> Subscribe(global::WPF.NETCore.MessageSubscribe request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
