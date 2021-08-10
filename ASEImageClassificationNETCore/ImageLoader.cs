@@ -16,6 +16,14 @@ namespace ASE
         NoLabel
     }
 
+    public enum ELabel : byte
+    {
+        None,
+        Close,
+        Open,
+    }
+
+
     public class ImageLoader
     {
 
@@ -75,50 +83,61 @@ namespace ASE
                 if ((Path.GetExtension(_file) != ".jpg") && (Path.GetExtension(_file) != ".png"))
                     continue;
                 //store filename in a variable, say ‘label’
-                var _label = Path.GetFileName(_file);
+                var _FileName = Path.GetFileName(_file);
+                ELabel _Label = ELabel.None;
                 /* If the useFolderNameAsLabel parameter is set to true, then name 
                    of parent directory of the image file is used as the label. Else label is expected to be the file name or a a prefix of the file name. */
 
                 switch (_setLabelMethod)
                 {
                     case SET_LABEL_METHOD.UseFolderNameAsLabel:
-                        _label = Directory.GetParent(_file).Name;
+
+                        if(!Enum.TryParse<ELabel>(Directory.GetParent(_file).Name, out _Label))
+                            throw new Exception("The image label is not matched");
+
                         break;
                     case SET_LABEL_METHOD.UsePrefixAsLabel:
                         {
                             int i = 0;
 
-                            while (char.IsLetter(_label[i]))
+                            while (char.IsLetter(_FileName[i]))
                             {
                                 i++;
                             }
 
-                            _label = _label.Substring(0, i);
+                            _FileName = _FileName.Substring(0, i);
+
+                            if(!Enum.TryParse<ELabel>(_FileName, out _Label))
+                                throw new Exception("The image label is not matched");
+
                             break;
                         }
                     case SET_LABEL_METHOD.UsePostfixAsLabel:
                         {
-                            int _firstLabelCharIndex = _label.LastIndexOf('_');
+                            int _firstLabelCharIndex = _FileName.LastIndexOf('_');
                             if (_firstLabelCharIndex == -1)
-                                throw new Exception($"Postfix Labling Method was used but didn't find any postfix label at the file name ({_label})");
+                                throw new Exception($"Postfix Labling Method was used but didn't find any postfix label at the file name ({_FileName})");
 
 
                             _firstLabelCharIndex++;
 
-                            int _dotIndex = _label.LastIndexOf('.');
+                            int _dotIndex = _FileName.LastIndexOf('.');
 
                             if (_firstLabelCharIndex == _dotIndex || _firstLabelCharIndex > _dotIndex)
                             {
-                                throw new Exception($"Failed at finding label : {_label}");
+                                throw new Exception($"Failed at finding label : {_FileName}");
                             }
 
-                            _label = _label.Substring(_firstLabelCharIndex, _dotIndex - _firstLabelCharIndex);
+                            _FileName = _FileName.Substring(_firstLabelCharIndex, _dotIndex - _firstLabelCharIndex);
+
+                            if(!Enum.TryParse<ELabel>(_FileName, out _Label))
+                                throw new Exception("The image label is not matched");
 
                             break;
                         }
                     case SET_LABEL_METHOD.NoLabel:
                         {
-                            _label = "";
+                            _Label = ELabel.None;
                             break;
                         }
                     default:
@@ -129,7 +148,7 @@ namespace ASE
                 yield return new ImageData()
                 {
                     ImagePath = _file,
-                    Label = _label
+                    Label = (byte)_Label
                 };
 
             }

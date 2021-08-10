@@ -12,7 +12,7 @@ namespace ASE
         public string ImagePath;
 
         [LoadColumn(1)]
-        public string Label;
+        public byte Label;
     }
 
     public class InMemoryImageData
@@ -21,7 +21,22 @@ namespace ASE
         public InMemoryImageData()
         {}
 
-        public InMemoryImageData(byte[] _image, string _label, string _imagePath)
+        public InMemoryImageData(byte[] _image)
+        {
+            Image = _image;
+        }
+
+        public readonly byte[] Image;
+        public UInt32 LabelKey;
+    }
+
+    public class InMemoryImageDataLabeled
+    {
+
+        public InMemoryImageDataLabeled()
+        { }
+
+        public InMemoryImageDataLabeled(byte[] _image, ELabel _label, string _imagePath)
         {
             Image = _image;
             Label = _label;
@@ -30,14 +45,14 @@ namespace ASE
 
         public readonly byte[] Image;
         public UInt32 LabelKey;
-        public readonly string Label;
+        public readonly ELabel Label;
         public readonly string ImagePath;
     }
 
 
     public class ImagePrediction : ImageData
     {
-        public string PredictedLabelValue;
+        public byte PredictedLabelValue;
     }
 
 

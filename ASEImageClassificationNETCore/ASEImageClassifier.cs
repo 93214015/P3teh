@@ -1,8 +1,10 @@
 ﻿using Microsoft.ML;
+using Microsoft.ML.Data;
 using Microsoft.ML.Vision;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ASE
@@ -31,8 +33,11 @@ namespace ASE
         public ASEImageClassifier()
         {
             mMLContext = new MLContext();
+
+            ProcessorCoreCount = Environment.ProcessorCount;
         }
 
+        private static int ProcessorCoreCount = 0;
 
         /// <summary>
         /// Train the model with images. this fucntion use InMemory Data. 
@@ -61,7 +66,7 @@ namespace ASE
             , bool _printOutputsToConsole = true)
         {
 
-            if(_relativePath)
+            if (_relativePath)
                 _dataDirectoryPath = Path.Combine(Environment.CurrentDirectory, _dataDirectoryPath);
 
 
@@ -98,8 +103,8 @@ namespace ASE
 
 
             Action<ImageClassificationTrainer.ImageClassificationMetrics> _metricCallback = null;
-            if(_printOutputsToConsole)
-            { 
+            if (_printOutputsToConsole)
+            {
                 _metricCallback = (metrics) => Console.WriteLine(metrics);
             }
 
@@ -152,13 +157,13 @@ namespace ASE
         /// <param name="_setLabelMethod">Indicate how input images should be labeled(classified). in the case of not-labeled input images set the parameter to "NoLabel". Labeled input images are usually used for testing the model.</param>
         public IEnumerable<ImagePrediction> Classify(string _dataDirectoryPath, bool _isPathRelative, SET_LABEL_METHOD _setLabelMethod)
         {
-            if(_isPathRelative)
+            if (_isPathRelative)
             {
                 _dataDirectoryPath = Path.Combine(Environment.CurrentDirectory, _dataDirectoryPath);
             }
 
 
-            if(!mIsTrained)
+            if (!mIsTrained)
             {
                 throw new Exception("The Model Should Trained or Load Before Prediction");
             }
@@ -189,7 +194,7 @@ namespace ASE
         /// Classify the input images
         /// </summary>
         /// <param name="_ImageData">Input Image Data (The Image Field (Array of bytes) is mandatory).</param>
-        public IEnumerable<ImagePrediction> Classify(IEnumerable<InMemoryImageData> _ImageData)
+        public IEnumerable<byte> Classify(IEnumerable<InMemoryImageData> _ImageData)
         {
             if (!mIsTrained)
             {
@@ -200,9 +205,72 @@ namespace ASE
 
             var _predictionData = mTrainedModel.Transform(_IDataView);
 
-            var _predictions = mMLContext.Data.CreateEnumerable<ImagePrediction>(_predictionData, reuseRowObject: true);
+            return _predictionData.GetColumn<byte>("PredictedLabelValue").ToList();
 
-            return _predictions;
+            //var _predictions = mMLContext.Data.CreateEnumerable<ImagePrediction>(_predictionData, reuseRowObject: true);
+            //return _predictions;
+
+        }
+
+        /// <summary>
+        /// Classify the input images
+        /// </summary>
+        /// <param name="_ImageData">Input Image Data (The Image Field (Array of bytes) is mandatory).</param>
+        public byte[] ClassifyMultiThreaded(List<InMemoryImageData> _ImageData)
+        {
+            if (!mIsTrained)
+            {
+                throw new Exception("The Model Should Trained or Load Before Prediction");
+            }
+
+            int _ImageCount = _ImageData.Count;
+            int _SharedCount = _ImageData.Count / ProcessorCoreCount;
+
+            List<Task<byte[]>> _TaskList = new List<Task<byte[]>>();
+
+            for (int i = 0; i < ProcessorCoreCount - 1; ++i)
+            {
+                var _Task = Task.Run(() =>
+                {
+                    List<InMemoryImageData> _SharedList = _ImageData.GetRange(i * _SharedCount, _SharedCount);
+                    return _ClassifyMultiThreaded(_SharedList);
+                });
+
+                _TaskList.Add(_Task);
+            }
+
+            var _LastTask = Task.Run(() =>
+            {
+                int _Start = (ProcessorCoreCount - 1) * _SharedCount;
+                int _Count = _ImageCount - _Start;
+                List<InMemoryImageData> _SharedList = _ImageData.GetRange(_Start, _Count);
+                return _ClassifyMultiThreaded(_SharedList);
+            });
+
+            _TaskList.Add(_LastTask);
+
+            byte[] _Results = new byte[_ImageCount];
+            int _StartIndex = 0;
+
+            foreach(var _Task in _TaskList)
+            {
+                byte[] _R = _Task.Result;
+                Array.Copy(_R, 0, _Results, _StartIndex, _R.Length);
+                _StartIndex += _R.Length;
+            }
+
+            return _Results;
+
+        }
+
+
+        private byte[] _ClassifyMultiThreaded(List<InMemoryImageData> _ImageData)
+        {
+            IDataView _IDataView = mMLContext.Data.LoadFromEnumerable(_ImageData);
+
+            var _predictionData = mTrainedModel.Transform(_IDataView);
+
+            return _predictionData.GetColumn<byte>("PredictedLabelValue").ToArray();
         }
 
         /// <summary>
@@ -213,8 +281,8 @@ namespace ASE
         /// <param name="_isPathRelative">The specified path is relative to the program executable directory or not</param>
         public void SaveModel(string _filePath, string _fileName, bool _isPathRelative = false)
         {
-            if(_isPathRelative)
-            { 
+            if (_isPathRelative)
+            {
                 _filePath = Path.Combine(Environment.CurrentDirectory, _filePath);
             }
 
@@ -251,7 +319,7 @@ namespace ASE
             {
                 var _fileName = Path.GetFileName(p.ImagePath);
 
-                string _printLabel = string.IsNullOrEmpty(p.Label) ? "" : $"| ActualLabel : {p.Label}";
+                string _printLabel = ((ELabel)p.Label == ELabel.None) ? "" : $"| ActualLabel : {((ELabel)(p.Label)).ToString()}";
                 Console.WriteLine($"Prediction Result: {_fileName} { _printLabel } | Prediction : {p.PredictedLabelValue}");
             }
         }

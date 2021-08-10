@@ -124,7 +124,10 @@ namespace WPF.NETCore.UserControls
                 mVideoCapture.FlipHorizontal = true;
                 mVideoCapture.ImageGrabbed += MVideoCapture_ImageGrabbed;
 
-                _ASEImageClassifier.LoadModel("", "model", true);
+                //_ASEImageClassifier.Train(@"C:\FinalDB\Train", false, ASE.SET_LABEL_METHOD.UseFolderNameAsLabel, ASE.EModelArchitecture.MobileNetV2);
+                //_ASEImageClassifier.SaveModel(@"", "model", true);
+
+                _ASEImageClassifier.LoadModel(@"C:\FinalDB", "P3tehFinalModel");
             }
             await Task.Run(() => mVideoCapture.Start());
         }
@@ -138,7 +141,7 @@ namespace WPF.NETCore.UserControls
                 mVideoCapture.Retrieve(_Image);
                 var _EmguImage = _Image.ToImage<Bgr, Byte>();
                 var _Bitmap = _EmguImage.ToBitmap();
-                
+
 
                 this.Dispatcher.Invoke(() =>
                 {
@@ -311,7 +314,7 @@ namespace WPF.NETCore.UserControls
             CTBackgroundProcessing.Visibility = Visibility.Collapsed;
 
             ShowBackgroundThumbnail();
-            
+
         }
 
         private void ShowBackgroundThumbnail()
@@ -340,10 +343,16 @@ namespace WPF.NETCore.UserControls
         {
             Mat _Image = new Mat();
             mVideoCapture.Retrieve(_Image);
-            List<ASE.InMemoryImageData> _InputData = new List<ASE.InMemoryImageData>();
-            ASE.InMemoryImageData _Data = new ASE.InMemoryImageData(_Image.GetRawData(), "", "");
-            _InputData.Add(_Data);
-            var result  = _ASEImageClassifier.Classify(_InputData).ToList();
+            ASE.InMemoryImageData[] _InputData = new ASE.InMemoryImageData[40];
+
+            for (int i = 0; i < 40; i++)
+            {
+                byte[] _ImageData = new byte[_Image.GetRawData().Length];
+                _Image.GetRawData().CopyTo(_ImageData, 0);
+                _InputData[i] = new ASE.InMemoryImageData(_ImageData);
+            }
+
+            var result = _ASEImageClassifier.ClassifyMultiThreaded(_InputData.ToList());
         }
 
         //private void GIFProcessingWait_MediaEnded(object sender, RoutedEventArgs e)
