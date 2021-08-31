@@ -18,6 +18,8 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using WpfAnimatedGif;
 using System.Linq;
+using System.IO;
+using System.Diagnostics;
 
 namespace WPF.NETCore.UserControls
 {
@@ -127,7 +129,13 @@ namespace WPF.NETCore.UserControls
                 //_ASEImageClassifier.Train(@"C:\FinalDB\Train", false, ASE.SET_LABEL_METHOD.UseFolderNameAsLabel, ASE.EModelArchitecture.MobileNetV2);
                 //_ASEImageClassifier.SaveModel(@"", "model", true);
 
-                _ASEImageClassifier.LoadModel(@"C:\FinalDB", "P3tehFinalModel");
+                _ASEImageClassifier.LoadModel(@"C:\FinalDB", "P3tehFinalModel", false, @"Images\ImagePredictionSampleData", true);
+
+                Mat _Image = new Mat();
+                mVideoCapture.Retrieve(_Image);
+                ASE.InMemoryImageData[] _SingleInputData = new ASE.InMemoryImageData[1];
+                _SingleInputData[0] = new ASE.InMemoryImageData(_Image.GetRawData());
+                var resultSingle = _ASEImageClassifier.Classify(_SingleInputData);
             }
             await Task.Run(() => mVideoCapture.Start());
         }
@@ -341,18 +349,129 @@ namespace WPF.NETCore.UserControls
 
         private void BtnTestPrediction_Click(object sender, RoutedEventArgs e)
         {
-            Mat _Image = new Mat();
-            mVideoCapture.Retrieve(_Image);
+            //{
+            //    Mat _Image = new Mat();
+            //    mVideoCapture.Retrieve(_Image);
+            //    ASE.InMemoryImageData[] _SingleInputData = new ASE.InMemoryImageData[1];
+
+
+            //    _SingleInputData[0] = new ASE.InMemoryImageData(_Image.GetRawData());
+
+            //    var resultSingle = _ASEImageClassifier.Classify(_SingleInputData);
+            //}
+
+            //{
+            //    Mat _Image = new Mat();
+            //    mVideoCapture.Retrieve(_Image);
+            //    Mat _ResizedImage = new Mat();
+            //    CvInvoke.Resize(_Image, _ResizedImage, new System.Drawing.Size(50, 50));
+            //    var _EmguBitmap = _ResizedImage.ToBitmap();
+            //    ASE.InMemoryImageData[] _SingleInputData = new ASE.InMemoryImageData[1];
+
+            //    using (var _MemoryStream = new MemoryStream())
+            //    {
+            //        _EmguBitmap.Save(_MemoryStream, System.Drawing.Imaging.ImageFormat.Png);
+            //        _SingleInputData[0] = new ASE.InMemoryImageData(_MemoryStream.ToArray());
+            //    }
+
+
+            //    var resultSingle = _ASEImageClassifier.Classify(_SingleInputData).ToArray();
+            //}
+
+            //{
+            //    var _Result = _ASEImageClassifier.Classify(@"D:\SourceCodes\C#\TensorFlowProjectSample\WinFormsApp1\test\1", false, ASE.SET_LABEL_METHOD.NoLabel).ToArray();
+            //}
+
+            //using (var _MemoryStream = new MemoryStream())
+            //{
+            //    var _EmguBitmap = _Image.ToBitmap();
+            //    _EmguBitmap.Save(_MemoryStream, System.Drawing.Imaging.ImageFormat.Png);
+            //}
+
             ASE.InMemoryImageData[] _InputData = new ASE.InMemoryImageData[40];
+
+            //for (int i = 0; i < 40; i++)
+            //{
+            //    Mat _Image = new Mat();
+            //    mVideoCapture.Retrieve(_Image);
+            //    //byte[] _ImageData = new byte[_Image.GetRawData().Length];
+            //    //_Image.GetRawData().CopyTo(_ImageData, 0);
+
+            //    _InputData[i] = new ASE.InMemoryImageData(_Image.GetRawData());
+
+            //}
 
             for (int i = 0; i < 40; i++)
             {
-                byte[] _ImageData = new byte[_Image.GetRawData().Length];
-                _Image.GetRawData().CopyTo(_ImageData, 0);
-                _InputData[i] = new ASE.InMemoryImageData(_ImageData);
+                Mat _Image = new Mat();
+                mVideoCapture.Retrieve(_Image);
+                //byte[] _ImageData = new byte[_Image.GetRawData().Length];
+                //_Image.GetRawData().CopyTo(_ImageData, 0);
+
+                using (var _MemoryStream = new MemoryStream())
+                {
+                    Mat _ResizedImage = new Mat();
+                    CvInvoke.Resize(_Image, _ResizedImage, new System.Drawing.Size(50, 50));
+                    Mat _GrayMat = new Mat();
+                    CvInvoke.CvtColor(_ResizedImage, _GrayMat, Emgu.CV.CvEnum.ColorConversion.Rgb2Gray);
+                    var _EmguBitmap = _GrayMat.ToBitmap();
+                    _EmguBitmap.Save(_MemoryStream, System.Drawing.Imaging.ImageFormat.Png);
+                    //_EmguBitmap.Save(@"d:\sample.png", System.Drawing.Imaging.ImageFormat.Png);
+                    _InputData[i] = new ASE.InMemoryImageData(_MemoryStream.ToArray());
+                }
+
             }
 
-            var result = _ASEImageClassifier.ClassifyMultiThreaded(_InputData.ToList());
+
+
+            //foreach (var _ImageData in _InputData)
+            //{
+            //    ASE.InMemoryImageData[] _SingleInputData = new ASE.InMemoryImageData[1] { _ImageData };
+
+            //    try
+            //    {
+            //        var resultSingle = _ASEImageClassifier.Classify(_SingleInputData);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //}
+
+            //{
+            //    var resultSingle = _ASEImageClassifier.Classify(_InputData);
+            //}
+
+
+            //Stopwatch _SW = new Stopwatch();
+
+            //_SW.Start();
+            //var result = _ASEImageClassifier.ClassifyMultiThreaded(_InputData.ToList());
+            //_SW.Stop();
+
+            //MessageBox.Show($"The ML.Net Prediction Time : {_SW.ElapsedMilliseconds}");
+
+            //Debug.WriteLine($"The classification Time was {_SW.ElapsedMilliseconds}");
+
+            //System.Drawing.Bitmap[] _Bitmaps = new System.Drawing.Bitmap[40];
+
+            //for (int i = 0; i < 40; i++)
+            //{
+            //    Mat _Image = new Mat();
+            //    mVideoCapture.Retrieve(_Image);
+            //    _Bitmaps[i] = _Image.ToBitmap();
+            //}
+
+
+            ASETensorflow.TFImageClassifier _ASETF = new ASETensorflow.TFImageClassifier(@"D:\SourceCodes\C#\TensorFlowProjectSample\WinFormsApp1\OpModel.pb", false);
+
+            
+            long _PredictionTime;
+
+            var _TFResults = _ASETF.Predict(@"D:\SourceCodes\C#\TensorFlowProjectSample\WinFormsApp1\test\0", "png", false, out _PredictionTime, 40 );
+
+            MessageBox.Show($"The Prediction Time : {_PredictionTime}");
+            
         }
 
         //private void GIFProcessingWait_MediaEnded(object sender, RoutedEventArgs e)

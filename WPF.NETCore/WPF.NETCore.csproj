@@ -48,6 +48,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\ASEImageClassificationNETCore\ASEImageClassificationNETCore.csproj" />
+		<ProjectReference Include="..\ASETensorflow\ASETensorflow.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -90,6 +91,9 @@
 
 	<ItemGroup>
 		<None Update="gRPC\greet.proto" GrpcServices="Client" />
+		<None Update="Images\ImagePredictionSampleData\p3teClose.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="P3teApp.db">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

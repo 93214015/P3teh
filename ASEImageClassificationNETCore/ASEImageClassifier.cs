@@ -205,12 +205,96 @@ namespace ASE
 
             var _predictionData = mTrainedModel.Transform(_IDataView);
 
-            return _predictionData.GetColumn<byte>("PredictedLabelValue").ToList();
+            return _predictionData.GetColumn<byte>("PredictedLabelValue");
 
             //var _predictions = mMLContext.Data.CreateEnumerable<ImagePrediction>(_predictionData, reuseRowObject: true);
             //return _predictions;
 
         }
+
+
+        public byte ClassifySingle(InMemoryImageData _ImageData)
+        {
+
+            var predictionEngine = mMLContext.Model.CreatePredictionEngine<InMemoryImageData, ImagePrediction>(mTrainedModel);
+
+            var _predict = predictionEngine.Predict(_ImageData);
+
+            return _predict.PredictedLabelValue;
+        }
+
+        ///// <summary>
+        ///// Classify the input images
+        ///// </summary>
+        ///// <param name="_ImageData">Input Image Data (The Image Field (Array of bytes) is mandatory).</param>
+        //public byte[] ClassifyMultiThreaded(List<InMemoryImageData> _ImageData)
+        //{
+        //    if (!mIsTrained)
+        //    {
+        //        throw new Exception("The Model Should Trained or Load Before Prediction");
+        //    }
+
+        //    int _ImageCount = _ImageData.Count;
+        //    int _SharedCount = _ImageData.Count / ProcessorCoreCount;
+
+        //    List<Task<int>> _TaskList = new List<Task<int>>();
+
+        //    byte[] _Results = new byte[_ImageCount];
+
+        //    Func<object, int> _Action = (object _StartIndex) =>
+        //    {
+        //        List<InMemoryImageData> _SharedList = _ImageData.GetRange((int)_StartIndex, _SharedCount);
+        //        var _TaskResult = _ClassifyMultiThreaded(_SharedList);
+        //        Array.Copy(_TaskResult, 0, _Results, (int)_StartIndex, _SharedCount);
+
+        //        return 0;
+        //    };
+
+        //    for (int i = 0; i < ProcessorCoreCount - 1; ++i)
+        //    {
+
+        //        _TaskList.Add(Task<int>.Factory.StartNew(_Action, i * _SharedCount));
+        //        //var _Task = Task<int>.Factory.StartNew(_Action, i * _SharedCount);
+        //        //_TaskList.Add(_Task);
+        //    }
+
+        //    Func<object, int> _ActionLast = (object _StartIndex) =>
+        //    {
+        //        int _Start = (ProcessorCoreCount - 1) * _SharedCount;
+        //        int _Count = _ImageCount - _Start;
+        //        List<InMemoryImageData> _SharedList = _ImageData.GetRange(_Start, _Count);
+        //        //var _TaskResult = _ClassifyMultiThreaded(_SharedList);
+        //        var _TaskResult = _ClassifyMultiThreaded(_SharedList);
+        //        Array.Copy(_TaskResult, 0, _Results, _Start, _Count);
+
+        //        return 0;
+        //    };
+        //    _TaskList.Add(Task<int>.Factory.StartNew(_ActionLast, 0));
+
+        //    //var _LastTask = Task.Run(() =>
+        //    //{
+        //    //    int _Start = (ProcessorCoreCount - 1) * _SharedCount;
+        //    //    int _Count = _ImageCount - _Start;
+        //    //    List<InMemoryImageData> _SharedList = _ImageData.GetRange(_Start, _Count);
+        //    //    return _ClassifyMultiThreaded(_SharedList);
+        //    //});
+
+        //    //_TaskList.Add(_LastTask);
+
+        //    //int _StartIndex = 0;
+
+        //    //foreach (var _Task in _TaskList)
+        //    //{
+        //    //    byte[] _R = _Task.Result;
+        //    //    Array.Copy(_R, 0, _Results, _StartIndex, _R.Length);
+        //    //    _StartIndex += _R.Length;
+        //    //}
+
+        //   Task.WaitAll(_TaskList.ToArray());
+
+        //    return _Results;
+
+        //}
 
         /// <summary>
         /// Classify the input images
@@ -223,54 +307,36 @@ namespace ASE
                 throw new Exception("The Model Should Trained or Load Before Prediction");
             }
 
-            int _ImageCount = _ImageData.Count;
-            int _SharedCount = _ImageData.Count / ProcessorCoreCount;
+            byte[] _Result = new byte[_ImageData.Count];
 
-            List<Task<byte[]>> _TaskList = new List<Task<byte[]>>();
 
-            for (int i = 0; i < ProcessorCoreCount - 1; ++i)
+            Parallel.For(0, _ImageData.Count, index =>
             {
-                var _Task = Task.Run(() =>
-                {
-                    List<InMemoryImageData> _SharedList = _ImageData.GetRange(i * _SharedCount, _SharedCount);
-                    return _ClassifyMultiThreaded(_SharedList);
-                });
-
-                _TaskList.Add(_Task);
-            }
-
-            var _LastTask = Task.Run(() =>
-            {
-                int _Start = (ProcessorCoreCount - 1) * _SharedCount;
-                int _Count = _ImageCount - _Start;
-                List<InMemoryImageData> _SharedList = _ImageData.GetRange(_Start, _Count);
-                return _ClassifyMultiThreaded(_SharedList);
+                _Result[index] = _ClassifyMultiThreaded(_ImageData[index]);
             });
 
-            _TaskList.Add(_LastTask);
-
-            byte[] _Results = new byte[_ImageCount];
-            int _StartIndex = 0;
-
-            foreach(var _Task in _TaskList)
-            {
-                byte[] _R = _Task.Result;
-                Array.Copy(_R, 0, _Results, _StartIndex, _R.Length);
-                _StartIndex += _R.Length;
-            }
-
-            return _Results;
+            return _Result;
 
         }
 
 
-        private byte[] _ClassifyMultiThreaded(List<InMemoryImageData> _ImageData)
+        private IEnumerable<byte> _ClassifyMultiThreaded(List<InMemoryImageData> _ImageData)
         {
             IDataView _IDataView = mMLContext.Data.LoadFromEnumerable(_ImageData);
 
             var _predictionData = mTrainedModel.Transform(_IDataView);
 
-            return _predictionData.GetColumn<byte>("PredictedLabelValue").ToArray();
+            return _predictionData.GetColumn<byte>("PredictedLabelValue");
+        }
+
+        private byte _ClassifyMultiThreaded(InMemoryImageData _ImageData)
+        {
+            IEnumerable<InMemoryImageData> _IData = new InMemoryImageData[] { _ImageData };
+            IDataView _IDataView = mMLContext.Data.LoadFromEnumerable(_IData);
+
+            var _predictionData = mTrainedModel.Transform(_IDataView);
+
+            return _predictionData.GetColumn<byte>("PredictedLabelValue").First();
         }
 
         /// <summary>
@@ -297,7 +363,9 @@ namespace ASE
         /// <param name="_filePath">The directory of saved model</param>
         /// <param name="_fileName">File name of saved model. The extension is not needed</param>
         /// <param name="_isPathRelative">Specify the file path is relative to the program executable directory or not</param>
-        public void LoadModel(string _filePath, string _fileName, bool _isPathRelative = false)
+        /// <param name="_SampleImagePath">Specify the sample image path for loading the model at the time</param>
+        /// <param name="_isSampleImgePathRelative">Specify the file path is relative to the program executable directory or not</param>
+        public void LoadModel(string _filePath, string _fileName, bool _isPathRelative = false, string _SampleImagePath = "", bool _isSampleImgePathRelative = false)
         {
 
             if (_isPathRelative)
@@ -310,6 +378,12 @@ namespace ASE
             DataViewSchema _inputSchema;
             mTrainedModel = mMLContext.Model.Load(_filePath, out _inputSchema);
             mIsTrained = true;
+
+            if (!String.IsNullOrEmpty(_SampleImagePath))
+            {
+                var _Prdictions = Classify(_SampleImagePath, _isSampleImgePathRelative, SET_LABEL_METHOD.NoLabel).ToList();
+                Console.WriteLine(_Prdictions[0].PredictedLabelValue);
+            }
         }
 
 
