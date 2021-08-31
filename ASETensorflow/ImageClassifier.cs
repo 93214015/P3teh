@@ -3,6 +3,7 @@ using System.IO;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace ASETensorflow
 {
@@ -35,27 +36,6 @@ namespace ASETensorflow
             int[] quantized = QuantizedF(_Result);
         }
 
-        public int[] Predict(Bitmap[] _Images)
-        {
-            int[] _ResultList = new int[_Images.Length];
-
-            Parallel.For(0, _Images.Length
-                , _Index =>
-                {
-                    var _Runner = m_Session.GetRunner();
-                    var _Tensor = ImageToTensorGrayScale(_Images[_Index]);
-                    _Runner.AddInput(m_Graph["x"][0], _Tensor);
-                    _Runner.Fetch(m_Graph["model_1/dense_1/Softmax"][0]);
-                    var _Output = _Runner.Run();
-                    var _VectorResult = _Output[0].GetValue();
-                    float[,] _Result = (float[,])_VectorResult;
-                    int[] quantized = QuantizedF(_Result);
-                    _ResultList[_Index] = quantized[1];
-                });
-
-            return _ResultList;
-        }
-
         public int[] Predict(string _ImageFolderPath, string _ImageFormat, bool _IsPathRelative, out long PredictionTime, int _LimitImageCount = -1)
         {
             if (_IsPathRelative)
@@ -78,6 +58,37 @@ namespace ASETensorflow
 
             Stopwatch _SW = new Stopwatch();
             _SW.Start();            
+
+            Parallel.For(0, _ImageCount
+                , _Index =>
+                {
+                    var _Runner = m_Session.GetRunner();
+                    var _Tensor = ImageToTensorGrayScale(_Images[_Index]);
+                    _Runner.AddInput(m_Graph["x"][0], _Tensor);
+                    _Runner.Fetch(m_Graph["model_1/dense_1/Softmax"][0]);
+                    var _Output = _Runner.Run();
+                    var _VectorResult = _Output[0].GetValue();
+                    float[,] _Result = (float[,])_VectorResult;
+                    int[] quantized = QuantizedF(_Result);
+                    _ResultList[_Index] = quantized[1];
+                });
+
+            _SW.Stop();
+
+            PredictionTime = _SW.ElapsedMilliseconds;
+
+            return _ResultList;
+        }
+
+        public int[] Predict(Bitmap[] _Images, out long PredictionTime)
+        {
+            
+            int _ImageCount = _Images.Length;
+
+            int[] _ResultList = new int[_ImageCount];
+
+            Stopwatch _SW = new Stopwatch();
+            _SW.Start();
 
             Parallel.For(0, _ImageCount
                 , _Index =>
